@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercadillo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body class="container mt-3">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Mercadillo</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav nav-tab card-header-tabs">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'donacion' %}">Donaciones</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'rebaja' %}">Productos desde 1 CLP</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'gratis' %}">Gratis</a>
+          </li>
+          <li class="nav-item content-end">
+            <a class="nav-link" href="#">Home</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="¿Qué necesitas?" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Buscar</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
+    <div class="col">
+      <div class="card h-100 border-info mb-3 shadow-lg">
+        <div class="card-header border-info text-center bg-transparent">
+          <p><h4>Compañia: Explora Chile</h4></p>
+          <p>Empresa Validada: SÍ</p>
+          <p>Calificaciones: 
+            <img src="https://static.vecteezy.com/system/resources/previews/016/017/445/non_2x/two-stars-rating-with-transparent-background-free-png.png" class="img-fluid" width="110px" style="margin-top: -50px; margin-bottom: -45px;">
+          </p>
+          <a href="#" class="btn btn-outline-info" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-headset" viewBox="0 0 16 16">
+              <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5"/>
+            </svg>
+          </a>
+          <a href="#" class="btn btn-outline-info" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+            </svg>
+          </a>
+          <a href="#" class="btn btn-outline-info" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+              <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+            </svg>
+          </a>
+        </div>
+        <div class="row g-0 h-100">
+          <div class="col-md-4">
+            <div id="carouselExampleSlidesOnly" class="carousel slide object-fit-scale border h-100" data-bs-ride="carousel">
+              <div class="carousel-inner h-100">
+                <div class="carousel-item active h-100">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUXnOasMqNnbNyDuyGEP2RTSgdXeJFMGhEzWTGqg74QD2lcve4FvAys1IzJt08yfo-GQo&usqp=CAU"  class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://www.patagoniatraveler.com/assets/images/patagoniatraveler_rgb.png" class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://www.patagoniatraveler.com/assets/images/subfooter/wetravel.jpg" class="img-fluid object-fit-scale h-100" alt=" ">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Guía de Turismo en la Patagonia</h5>
+              <p class="card-text">Una completa guía digital que te llevará a los lugares más increíbles de la Patagonia chilena. Incluye rutas de trekking, recomendaciones de alojamiento y actividades imperdibles. Perfecta para planificar tu próxima aventura.</p>
+              <h5 class= "card-text">Gratis</h5>
+              <a href="#" class="btn btn-primary">Comprar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 border-info mb-3 shadow-lg">
+        <div class="card-header border-info text-center bg-transparent">
+          <p><h4>Compañia: Cocina Sana</h4></p>
+          <p>Empresa Validada: No</p>
+          <p>Calificaciones: 
+            <img src="https://static.vecteezy.com/system/resources/previews/016/314/363/non_2x/three-stars-rating-with-transparent-background-free-png.png" class="img-fluid" width="110px" style="margin-top: -50px; margin-bottom: -45px;">
+          </p>
+          <a href="#" class="btn btn-outline-info" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-headset" viewBox="0 0 16 16">
+              <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5"/>
+            </svg>
+          </a>
+          <a href="#" class="btn btn-outline-info" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+            </svg>
+          </a>
+          <a href="#" class="btn btn-outline-info" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+              <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+            </svg>
+          </a>
+        </div>
+        <div class="row g-0 h-100">
+          <div class="col-md-4">
+            <div id="carouselExampleSlidesOnly" class="carousel slide object-fit-scale border h-100" data-bs-ride="carousel">
+              <div class="carousel-inner h-100">
+                <div class="carousel-item active h-100">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjBqrbxanu7YvE5i1sgmb2jBpFPqhMkoGtiY1VajYutg&s"  class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://rimage.ripley.cl/home.ripley/Attachment/MKP/2357/MPM00003711354/full_image-1.jpg" class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://lacuinadegavina.org/wp-content/uploads/llibre-les-101.jpg" class="img-fluid object-fit-scale h-100" alt=" ">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Recetario Saludable</h5>
+              <p class="card-text">Un recetario en formato PDF con más de 50 recetas saludables, incluyendo opciones veganas y sin gluten. Cada receta está diseñada para ser fácil de seguir y deliciosa, ayudándote a mantener un estilo de vida saludable.</p>
+              <h5 class= "card-text">Gratis</h5>
+              <a href="#" class="btn btn-primary">Comprar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 border-info mb-3 shadow-lg">
+        <div class="card-header border-info text-center bg-transparent">
+          <p><h4>Compañia: Tech Academy</h4></p>
+          <p>Empresa Validada: No</p>
+          <p>Calificaciones: 
+            <img src="https://static.vecteezy.com/system/resources/previews/016/314/898/large_2x/one-stars-rating-with-transparent-background-free-png.png" class="img-fluid" width="110px" style="margin-top: -50px; margin-bottom: -45px;">
+          </p>
+          <a href="#" class="btn btn-outline-info" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-headset" viewBox="0 0 16 16">
+              <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5"/>
+            </svg>
+          </a>
+          <a href="#" class="btn btn-outline-info" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+            </svg>
+          </a>
+          <a href="#" class="btn btn-outline-info" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+              <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+            </svg>
+          </a>
+        </div>
+        <div class="row g-0 h-100">
+          <div class="col-md-4">
+            <div id="carouselExampleSlidesOnly" class="carousel slide object-fit-scale border h-100" data-bs-ride="carousel">
+              <div class="carousel-inner h-100">
+                <div class="carousel-item active h-100">
+                  <img src="https://www.upacifico.cl/wp-content/uploads/2020/03/Cursos-de-programacion.jpg"  class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://www.aprendum.com/cdn/13/images/20150302155135nxwxtk.jpg" class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://www.codinggiants.cl/media/thumbnails/736ff4969d9e79312f688e290371596a.webp" class="img-fluid object-fit-scale h-100" alt=" ">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Curso Básico de Programación</h5>
+              <p class="card-text">Un curso en línea de introducción a la programación, ideal para principiantes. Aprende los fundamentos de lenguajes como Python y JavaScript a través de lecciones interactivas y proyectos prácticos.</p>
+              <h5 class= "card-text">Gratis</h5>
+              <a href="#" class="btn btn-primary">Comprar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 border-info mb-3 shadow-lg">
+        <div class="card-header border-info text-center bg-transparent">
+          <p><h4>Compañia: Finanzas para Todos</h4></p>
+          <p>Empresa Validada: SÍ</p>
+          <p>Calificaciones: 
+            <img src="https://static.vecteezy.com/system/resources/previews/016/016/805/non_2x/four-stars-rating-with-transparent-background-free-png.png" class="img-fluid" width="110px" style="margin-top: -50px; margin-bottom: -45px;">
+          </p>
+          <a href="#" class="btn btn-outline-info" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-headset" viewBox="0 0 16 16">
+              <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5"/>
+            </svg>
+          </a>
+          <a href="#" class="btn btn-outline-info" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+            </svg>
+          </a>
+          <a href="#" class="btn btn-outline-info" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+              <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+            </svg>
+          </a>
+        </div>
+        <div class="row g-0 h-100">
+          <div class="col-md-4">
+            <div id="carouselExampleSlidesOnly" class="carousel slide object-fit-scale border h-100" data-bs-ride="carousel">
+              <div class="carousel-inner h-100">
+                <div class="carousel-item active h-100">
+                  <img src="https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded_nologo400/5649997/5649997-1609593820614-795789a12f7f2.jpg"  class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://asnef.com/media/2926/logo_fxt_pos_cmyk_1.jpg?width=500&height=299.0033222591362" class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFz1wIMTOLw8mNztGxzMf5V0tYGeC4xFi0WUqaQ8Fa7kTkbFTDphb61ZhnKO04QsxVbSE&usqp=CAUg" class="img-fluid object-fit-scale h-100" alt=" ">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Ebook de Finanzas Personales</h5>
+              <p class="card-text">Este ebook te enseñará los conceptos básicos de la gestión de finanzas personales, desde la elaboración de un presupuesto hasta la inversión inicial. Incluye ejercicios prácticos y consejos de expertos para mejorar tu salud financiera.</p>
+              <h5 class= "card-text">Gratis</h5>
+              <a href="#" class="btn btn-primary">Comprar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 border-info mb-3 shadow-lg">
+        <div class="card-header border-info text-center bg-transparent">
+          <p><h4>Compañia: Paz Interior</h4></p>
+          <p>Empresa Validada: SÍ</p>
+          <p>Calificaciones: 
+            <img src="https://static.vecteezy.com/system/resources/previews/016/016/805/non_2x/four-stars-rating-with-transparent-background-free-png.png" class="img-fluid" width="110px" style="margin-top: -50px; margin-bottom: -45px;">
+          </p>
+          <a href="#" class="btn btn-outline-info" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-headset" viewBox="0 0 16 16">
+              <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5"/>
+            </svg>
+          </a>
+          <a href="#" class="btn btn-outline-info" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+            </svg>
+          </a>
+          <a href="#" class="btn btn-outline-info" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+              <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+            </svg>
+          </a>
+        </div>
+        <div class="row g-0 h-100">
+          <div class="col-md-4">
+            <div id="carouselExampleSlidesOnly" class="carousel slide object-fit-scale border h-100" data-bs-ride="carousel">
+              <div class="carousel-inner h-100">
+                <div class="carousel-item active h-100">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnn13xYHHDYJlTfpTFSmvcxpNayjUi0i8y8iju6aDHew&s"  class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://www.sentirmemejor.com/wp-content/uploads/2022/12/Meditacion-guiada.png" class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZDf1pV9MQkq02X7qhC2gy7aeEPzuwC5vOBW4CT61UBGtJDFDY1PQu5cSB-EQq8V2tXOE&usqp=CAU" class="img-fluid object-fit-scale h-100" alt=" ">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Meditaciones Guiadas</h5>
+              <p class="card-text">Una colección de meditaciones guiadas en formato de audio, diseñadas para ayudarte a reducir el estrés y mejorar tu bienestar emocional. Perfectas para principiantes y personas con experiencia en meditación.</p>
+              <h5 class= "card-text">Gratis</h5>
+              <a href="#" class="btn btn-primary">Comprar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 border-info mb-3 shadow-lg">
+        <div class="card-header border-info text-center bg-transparent">
+          <p><h4>Compañia: CV Creativo</h4></p>
+          <p>Empresa Validada: No</p>
+          <p>Calificaciones: 
+            <img src="https://static.vecteezy.com/system/resources/previews/016/017/445/non_2x/two-stars-rating-with-transparent-background-free-png.png" class="img-fluid" width="110px" style="margin-top: -50px; margin-bottom: -45px;">
+          </p>
+          <a href="#" class="btn btn-outline-info" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-headset" viewBox="0 0 16 16">
+              <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5"/>
+            </svg>
+          </a>
+          <a href="#" class="btn btn-outline-info" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+            </svg>
+          </a>
+          <a href="#" class="btn btn-outline-info" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+              <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+            </svg>
+          </a>
+        </div>
+        <div class="row g-0 h-100">
+          <div class="col-md-4">
+            <div id="carouselExampleSlidesOnly" class="carousel slide object-fit-scale border h-100" data-bs-ride="carousel">
+              <div class="carousel-inner h-100">
+                <div class="carousel-item active h-100">
+                  <img src="https://www.ayudacv.es/wp-content/uploads/sites/5/2023/08/Plantilla_Word_hero_01@x2.webp"  class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRb_uLBECAvN0oJd8OQ053kwClbB7njnkENu7prlymuW2ecfEEG86WISnl4wzjsOiZGFLA&usqp=CAU" class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://www.modelos-de-curriculum.com/wp-content/uploads/2024/02/plantillas-de-curriculum-vitae-1x.png" class="img-fluid object-fit-scale h-100" alt=" ">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Plantillas de Curriculum Vitae</h5>
+              <p class="card-text">Un conjunto de plantillas profesionales de curriculum vitae en formato Word y PDF. Diseñadas para distintos sectores y niveles de experiencia, estas plantillas te ayudarán a destacar en tu búsqueda de empleo.</p>
+              <h5 class= "card-text">Gratis</h5>
+              <a href="#" class="btn btn-primary">Comprar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
