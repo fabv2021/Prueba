@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Informal Business Registration</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 90%;
+        margin: 0;
+        color: #212529;
+      }
+
+      .form-container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        width: 40%;
+      }
+
+      .logo-container img {
+        max-width: 100px;
+        margin-bottom: 10px;
+      }
+      form {
+        display: inline-grid;
+        text-align: left;
+        width: 100%;
+      }
+      img {
+        margin-left: 10%;
+        width: 100px;
+        height: 90px;
+      }
+      .logo-container {
+        margin-left: 20px;
+        display: flex;
+      }
+      .rut {
+        margin-top: 5%;
+        margin-left: 20%;
+      }
+      .InputContainer {
+        width: 100%;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 10px;
+        overflow: hidden;
+        cursor: pointer;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.251);
+      }
+
+      .input {
+        width: 98%;
+        height: 90%;
+        border: none;
+        outline: none;
+        caret-color: rgb(255, 81, 0);
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+        padding-left: 15px;
+        letter-spacing: 0.8px;
+        color: rgb(19, 19, 19);
+        font-size: 13.4px;
+      }
+      label {
+        margin-bottom: 10px;
+        margin-top: 10px;
+      }
+      .textos {
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+      .next-button {
+        height: 50px;
+        width: 200px;
+        background-color: #004aad;
+        color: white;
+        font-size: 20px;
+        border-radius: 10px;
+        margin-left: 25%;
+      }
+      .back-button {
+        font-size: 20px;
+        color: black;
+        background-color: white;
+        border-color: #004aad;
+        width: 30px;
+        height: 30px;
+        border-radius: 10px;
+      }
+      h2 {
+        text-align: center;
+        background-color: #004aad;
+        color: white;
+        height: 70px;
+        border-radius: 20px;
+        padding-top: 5%;
+      }
+      .ruttext {
+        margin-bottom: -10px;
+        display: block;
+      }
+      .icon-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+      .icon {
+        background-color: #004aad;
+        color: white;
+        padding: 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      /* Estilos adicionales para los demás elementos del formulario */
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <form action="/submit-form" method="post">
+        <h2>Informal Business Registration</h2>
+        <div class="logo-container">
+          <input
+            type="file"
+            id="logo"
+            style="display: none"
+            onchange="previewLogo()"
+          />
+          <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-card-image" viewBox="0 0 16 16">
+            <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+            <path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2zm13 1a.5.5 0 0 1 .5.5v6l-3.775-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12v.54L1 12.5v-9a.5.5 0 0 1 .5-.5z"/>
+          </svg>
+
+          <div class="rut">
+            <label class="ruttext" for="companyName">Company EIN *</label>
+            <br />
+            <div class="InputContainer">
+              <input
+                placeholder="Enter EIN"
+                id="input"
+                class="input"
+                name="text"
+                type="text"
+              />
+            </div>
+          </div>
+        </div>
+
+        <label for="companyName">Company Name *</label>
+        <div class="InputContainer">
+          <input
+            placeholder="Enter Company Name"
+            id="input"
+            class="input"
+            name="text"
+            type="text"
+          />
+        </div>
+        <label for="companyName">Business Activity *</label>
+        <div class="InputContainer">
+          <input
+            placeholder="Enter Business Activity"
+            id="input"
+            class="input"
+            name="text"
+            type="text"
+          />
+        </div>
+        <label for="adminName">Address *</label>
+        <div class="InputContainer">
+          <input
+            placeholder="Enter Addres"
+            id="input"
+            class="input"
+            name="text"
+            type="text"
+          />
+        </div>
+
+        <label for="address">City</label>
+        <div class="InputContainer">
+          <input
+            placeholder="Enter City"
+            id="input"
+            class="input"
+            name="text"
+            type="text"
+          />
+        </div>
+
+        <label for="position">Country</label>
+        <div class="InputContainer">
+          <input
+            placeholder="Enter Position"
+            id="input"
+            class="input"
+            name="text"
+            type="text"
+          />
+        </div>
+
+        <label for="email">Zip code *</label>
+        <div class="InputContainer">
+          <input
+            placeholder="Enter Zip"
+            id="input"
+            class="input"
+            name="text"
+            type="text"
+          />
+        </div>
+
+        <label for="phone">Cell phone work *</label>
+        <div class="InputContainer">
+          <input
+            placeholder="Enter cell phone work"
+            id="input"
+            class="input"
+            name="text"
+            type="text"
+          />
+        </div>
+
+        <div class="textos">* Mandatory Information <br /></div>
+        <div><input type="checkbox">I accept the contract</div>
+      </form>
+      <div class="icon-container">
+        <a
+          href={% url 'contratoSer' %}
+          style="text-decoration: none; color: black"
+        >
+          <div style="font-size: 20px; align-items: center; text-align: center">
+            Contract
+          </div>
+          <div class="icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="currentColor"
+              class="bi bi-file-earmark-text-fill"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1z"
+              />
+            </svg>
+            <i class="fas fa-file-alt"></i>
+          </div>
+        </a>
+      </div>
+      <div class="buttons-container" style="margin-top: 20px">
+        <a  href={% url 'registrarEmpresa' %}>
+          <button type="button" class="back-button"><</button>
+        </a>
+        <a >
+          <button class="next-button" onclick="window.location.href='http://127.0.0.1:8000/login/'">Sign up</button>
+        </a>
+      </div>
+    </div>
+    <script>
+      function previewLogo() {
+        const file = document.getElementById("logo").files[0];
+        const preview = document.getElementById("logo-preview");
+        const reader = new FileReader();
+
+        reader.addEventListener("load", function () {
+          preview.src = reader.result;
+        });
+
+        if (file) {
+          reader.readAsDataURL(file);
+        }
+      }
+    </script>
+  </body>
+</html>

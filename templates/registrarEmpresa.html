@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #f4f4f4;
+        align-items: center;
+        text-align: center;
+        zoom: 150%;
+      }
+      .container {
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        width: 500px;
+        margin-top: 20px;
+      }
+
+      .register-button {
+        padding: 15px 25px;
+        border: none;
+        border-radius: 5px;
+        background-color: #004aad;
+        color: #fff;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 20px;
+
+        width: 200px;
+      }
+
+      .button:hover {
+        background-color: #3e8e41;
+      }
+
+      .container {
+        width: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Register Company / Entrepreneurship</h2>
+      <h4>¿ Your Company / Entrepreneurship is ?</h4>
+      <a href={% url 'empresaFormal' %}>
+        <button
+          class="register-button"
+         
+          style="margin-top: 5px"
+        >
+          Formal
+        </button>
+      </a>
+      <a href={% url 'empresaInformal' %}>
+        <button
+          class="register-button"
+          
+        >
+          Informal
+        </button>
+      </a>
+    </div>
+  </body>
+</html>

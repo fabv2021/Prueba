@@ -1,0 +1,55 @@
+
+<div class="tab-container">
+    <input type="radio" name="tab" id="tab1" class="tab tab--1" value="home" />
+    <label class="tab_label" for="tab1" onclick="redirectTo('http://127.0.0.1:8000/home/')">Inicio</label>
+  
+    <input type="radio" name="tab" id="tab2" class="tab tab--2" value="visualizador" />
+    <label class="tab_label" for="tab2" onclick="redirectTo('http://127.0.0.1:3000/')">Visualizador</label>
+  
+    <input type="radio" name="tab" id="tab3" class="tab tab--3" value="marketplace" />
+    <label class="tab_label" for="tab3" onclick="redirectTo('http://127.0.0.1:8000/marketplace/')">Marketplace</label>
+
+    <input type="radio" name="tab" id="tab4" class="tab tab--4" value="buscador" />
+    <label class="tab_label" for="tab4" onclick="redirectTo('http://127.0.0.1:8000/buscador/')">Buscador</label>
+
+    <input type="radio" name="tab" id="tab5" class="tab tab--5" value="agenda" />
+    <label class="tab_label" for="tab5" onclick="redirectTo('http://127.0.0.1:8000/agenda/')">Contactos</label>
+
+    <input type="radio" name="tab" id="tab6" class="tab tab--6" value="reunion" />
+    <label class="tab_label" for="tab6" onclick="redirectTo('http://127.0.0.1:8000/reunion/')">Reunión</label>
+
+    <input type="radio" name="tab" id="tab7" class="tab tab--7" value="llamada" />
+    <label class="tab_label" for="tab7" onclick="redirectTo('http://127.0.0.1:8000/llamada/')">Llamada</label>
+
+    <input type="radio" name="tab" id="tab8" class="tab tab--8" value="economico" />
+    <label class="tab_label" for="tab8" onclick="redirectTo('http://127.0.0.1:8000/economico')">Económicos</label>
+
+    <input type="radio" name="tab" id="tab9" class="tab tab--9" value="capacitacion" />
+    <label class="tab_label" for="tab9" onclick="redirectTo('http://10.236.5.12:8080/moodle/')">Capacitación</label>
+
+    <input type="radio" name="tab" id="tab10" class="tab tab--10" value="mercadillo" />
+    <label class="tab_label" for="tab10" onclick="redirectTo('http://127.0.0.1:8000/mercadillo/')">Mercadillo</label>
+  
+    <div class="indicator"></div>
+</div>
+
+<script>
+
+function redirectTo(url) {
+    window.location.href = url;
+}
+
+    // Función para seleccionar la pestaña activa según la URL
+    function selectActiveTab() {
+        const currentUrl = window.location.href;
+
+        const tabs = document.querySelectorAll('.tab');
+        tabs.forEach(tab => {
+            const tabUrl = tab.nextElementSibling.getAttribute('onclick').match(/'(.*)'/)[1];
+            if (currentUrl.includes(tab.value)) {
+                tab.checked = true;
+            }
+        });
+    }
+    window.onload = selectActiveTab;
+</script>

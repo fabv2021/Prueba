@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css">
+    <style>
+        .card-header-custom {
+            background-color: #004AAD;
+            color: white;
+            border-color: #004AAD;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 70px; /* Ajustar la altura según sea necesario */
+        }
+        .etiqueta {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0; 
+        }
+        .table-container {
+            max-height: 300px; /* Ajusta la altura según sea necesario */
+            overflow-y: auto;
+        }
+        .table tbody tr td {
+            padding: 15px 0; 
+        }
+    </style>
+</head>
+<body class="container mt-3">
+    {% include "navegacion.html" %}
+    <div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
+        <div class="col-md-4">
+            <div class="card h-100 border-info mb-3 shadow-lg">
+                <div class="card-header card-header-custom">
+                    <h4>Information <i class="bi bi-arrow-down-up" style="cursor:pointer;" onclick="sortTable()"></i></h4>
+                </div>
+                <div class="card-body table-container">
+                    <table class="table" id="empresaTable">
+                        <tbody>
+                            <tr onclick="updateCard('AGRICOLA ALTO TRAIGUEN SA')" class="border-bottom">
+                                <td>AGRICOLA ALTO TRAIGUEN SA</td>
+                            </tr>
+                            <tr onclick="updateCard('ALCIA SERVICIOS LTDA.')" class="border-bottom">
+                                <td>ALCIA SERVICIOS LTDA.</td>
+                            </tr>
+                            <tr onclick="updateCard('Servicios de corta de madera')" class="border-bottom">
+                                <td>Servicios de corta de madera</td>
+                            </tr>
+                            <tr onclick="updateCard('ADMINISTRADORA DE RESTAURANTES LIMITADA')" class="border-bottom">
+                                <td>ADMINISTRADORA DE RESTAURANTES LIMITADA</td>
+                            </tr>
+                            <tr onclick="updateCard('AGENCIA PRIZE EMPRESA DE SERVICIOS TRANSITORIOS LIMITADA')" class="border-bottom">
+                                <td>AGENCIA PRIZE EMPRESA DE SERVICIOS TRANSITORIOS LIMITADA</td>
+                            </tr>
+                            <tr onclick="updateCard('LATAM Airlines Group')" class="border-bottom">
+                                <td>LATAM Airlines Group</td>
+                            </tr>
+                            <tr onclick="updateCard('Cencosud')" class="border-bottom">
+                                <td>Cencosud</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card h-100 border-info mb-3 shadow-lg">
+                <div class="card-header card-header-custom">
+                    <h4 id="etiqueta" class="etiqueta">Select a contact</h4>
+                </div>
+                <div class="card-body text-center" id="info-default">
+                    <img src="https://example.com/tu-logo.png" alt="Company Logo" class="img-fluid" width="150px">
+                    <p class="mt-3">Select a contact to see detailed information</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    const empresas = {
+        'AGRICOLA ALTO TRAIGUEN SA': {
+            etiqueta: 'Sales',
+            logo: '{% static "images/logo_altoTraiguen.png" %}',
+            calificaciones: 'https://static.vecteezy.com/system/resources/previews/016/016/805/non_2x/four-stars-rating-with-transparent-background-free-png.png',
+            nombre: 'CAMILO TORREALBA',
+            empresa: 'AGRICOLA ALTO TRAIGUEN SA',
+            validada: Math.random() > 0.5 ? 'Yes' : 'No',
+            cargo: 'Sales Manager',
+            direccion: 'Av. Libertador Bernardo O\'Higgins 123',
+            ubicacion: 'Chile, Santiago, Centro'
+        },
+        'ALCIA SERVICIOS LTDA.': {
+            etiqueta: 'HR',
+            logo: '{% static "images/logo_grupoAlcia.png" %}',
+            calificaciones: 'https://static.vecteezy.com/system/resources/previews/016/016/805/non_2x/four-stars-rating-with-transparent-background-free-png.png',
+            nombre: 'MARCOS HUERTA',
+            empresa: 'ALCIA SERVICIOS LTDA.',
+            validada: Math.random() > 0.5 ? 'Yes' : 'No',
+            cargo: 'HR Director',
+            direccion: 'Calle Los Aromos 456',
+            ubicacion: 'Chile, Valparaíso, Recreo'
+        },
+        'Servicios de corta de madera': {
+            etiqueta: 'Transport',
+            logo: '{% static "images/logo_cortaMadera.png" %}',
+            calificaciones: 'https://static.vecteezy.com/system/resources/previews/016/016/805/non_2x/four-stars-rating-with-transparent-background-free-png.png',
+            nombre: 'RENE ARAYA',
+            empresa: 'Servicios de corta de madera',
+            validada: Math.random() > 0.5 ? 'Yes' : 'No',
+            cargo: 'Transport Supervisor',
+            direccion: 'Ruta 5 Sur Km 678',
+            ubicacion: 'Chile, Temuco, Rural'
+        },
+        'ADMINISTRADORA DE RESTAURANTES LIMITADA': {
+            etiqueta: 'Operations Manager',
+            logo: '{% static "images/logo_adminRestaurantes.png" %}',
+            calificaciones: 'https://static.vecteezy.com/system/resources/previews/016/016/805/non_2x/four-stars-rating-with-transparent-background-free-png.png',
+            nombre: 'MARIA MORALES',
+            empresa: 'ADMINISTRADORA DE RESTAURANTES LIMITADA',
+            validada: Math.random() > 0.5 ? 'Yes' : 'No',
+            cargo: 'Operations Manager',
+            direccion: 'Av. Vicuña Mackenna 789',
+            ubicacion: 'Chile, Concepción, Centro'
+        },
+        'AGENCIA PRIZE EMPRESA DE SERVICIOS TRANSITORIOS LIMITADA': {
+            etiqueta: 'HR',
+            logo: '{% static "images/logo_agPrize.png" %}',
+            calificaciones: 'https://static.vecteezy.com/system/resources/previews/016/016/805/non_2x/four-stars-rating-with-transparent-background-free-png.png',
+            nombre: 'ANA MARIA',
+            empresa: 'AGENCIA PRIZE EMPRESA DE SERVICIOS TRANSITORIOS LIMITADA',
+            validada: Math.random() > 0.5 ? 'Yes' : 'No',
+            cargo: 'HR Coordinator',
+            direccion: 'Calle O\'Higgins 234',
+            ubicacion: 'Chile, Antofagasta, Centro'
+        },
+        'LATAM Airlines Group': {
+            etiqueta: 'Airline',
+            logo: '{% static "images/logo_latam.png" %}',
+            calificaciones: 'https://static.vecteezy.com/system/resources/previews/016/016/805/non_2x/four-stars-rating-with-transparent-background-free-png.png',
+            nombre: 'ROBERTO ALVO',
+            empresa: 'LATAM Airlines Group',
+            validada: Math.random() > 0.5 ? 'Yes' : 'No',
+            cargo: 'CEO',
+            direccion: 'Av. Américo Vespucio 901',
+            ubicacion: 'Chile, Santiago, Las Condes'
+        },
+        'Cencosud': {
+            etiqueta: 'Retail',
+            logo: '{% static "images/logo_cencosud.png" %}',
+            calificaciones: 'https://static.vecteezy.com/system/resources/previews/016/016/805/non_2x/four-stars-rating-with-transparent-background-free-png.png',
+            nombre: 'MATIAS VIDAL',
+            empresa: 'Cencosud',
+            validada: Math.random() > 0.5 ? 'Yes' : 'No',
+            cargo: 'Commercial Director',
+            direccion: 'Av. Kennedy 9001',
+            ubicacion: 'Chile, Santiago, Vitacura'
+        }
+    };
+
+    function updateCard(empresa) {
+        const data = empresas[empresa];
+        document.getElementById('etiqueta').innerText = data.etiqueta;
+        document.getElementById('info-default').innerHTML = `
+            <img src="${data.logo}" alt="${empresa} Logo" class="img-fluid" width="100px">
+            <p><img src="${data.calificaciones}" alt="Ratings" class="img-fluid" width="110px" style="margin-top: -50px; margin-bottom: -45px;"></p>
+            <p><strong>Name:</strong> ${data.nombre}</p>
+            <p><strong>Company:</strong> ${data.empresa}</p>
+            <p><strong>Verified Company:</strong> ${data.validada}</p>
+            <p><strong>Position:</strong> ${data.cargo}</p>
+            <p><strong>Address:</strong> ${data.direccion}</p>
+            <p><strong>Location:</strong> ${data.ubicacion}</p>
+            <div class="d-flex justify-content-center">
+                <a class="btn btn-outline-info mx-1" href="{% url 'llamada' %}" role="button" style="background-color: #004AAD; color: white; border-color: #004AAD;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-headset" viewBox="0 0 16 16">
+                        <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5"/>
+                    </svg>
+                </a>
+                <a class="btn btn-outline-info mx-1" href="{% url 'editar' %}" role="button" style="background-color: #004AAD; color: white; border-color: #004AAD;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+                    </svg>
+                </a>
+                <a class="btn btn-outline-info mx-1" href="{% url 'agenda' %}" role="button" style="background-color: #004AAD; color: white; border-color: #004AAD;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                    </svg>
+                </a>
+                <a class="btn btn-outline-info mx-1" href="{% url 'chat' %}" role="button" style="background-color: #004AAD; color: white; border-color: #004AAD;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-text" viewBox="0 0 16 16">
+                        <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"/>
+                        <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6m0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+                    </svg>
+                </a>
+                <a class="btn btn-outline-info mx-1" href="https://outlook.office365.com/mail/" role="button" style="background-color: #004AAD; color: white; border-color: #004AAD;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-at" viewBox="0 0 16 16">
+                        <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2zm3.708 6.208L1 11.105V5.383zM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2z"/>
+                        <path d="M14.247 14.269c1.01 0 1.587-.857 1.587-2.025v-.21C15.834 10.43 14.64 9 12.52 9h-.035C10.42 9 9 10.36 9 12.432v.214C9 14.82 10.438 16 12.358 16h.044c.594 0 1.018-.074 1.237-.175v-.73c-.245.11-.673.18-1.18.18h-.044c-1.334 0-2.571-.788-2.571-2.655v-.157c0-1.657 1.058-2.724 2.64-2.724h.04c1.535 0 2.484 1.05 2.484 2.326v.118c0 .975-.324 1.39-.639 1.39-.232 0-.41-.148-.41-.42v-2.19h-.906v.569h-.03c-.084-.298-.368-.63-.954-.63-.778 0-1.259.555-1.259 1.4v.528c0 .892.49 1.434 1.26 1.434.471 0 .896-.227 1.014-.643h.043c.118.42.617.648 1.12.648m-2.453-1.588v-.227c0-.546.227-.791.573-.791.297 0 .572.192.572.708v.367c0 .573-.253.744-.564.744-.354 0-.581-.215-.581-.8Z"/>
+                    </svg>
+                </a>
+                <a class="btn btn-outline-info mx-1" href="{% url 'reunion' %}" role="button" style="background-color: #004AAD; color: white; border-color: #004AAD;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-workspace" viewBox="0 0 16 16">
+                        <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+                        <path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.4 5.4 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2z"/>
+                    </svg>
+                </a>
+            </div>
+        `;
+    }
+
+    function resetCard() {
+        document.getElementById('etiqueta').innerText = "Select a contact";
+        document.getElementById('info-default').innerHTML = `
+            <img src="/static/images/logo_netgocios.png" alt="Company Logo" class="img-fluid" width="350px">
+            <p class="mt-3"><strong>Select a contact to see detailed information</strong></p>
+        `;
+    }
+
+    function sortTable() {
+        const table = document.getElementById('empresaTable');
+        const rows = Array.from(table.rows);
+
+        rows.sort((a, b) => a.textContent.localeCompare(b.textContent));
+
+        const fragment = document.createDocumentFragment();
+
+        rows.forEach(row => {
+            const newRow = document.createElement('tr');
+            newRow.className = 'border-bottom';
+            newRow.onclick = row.onclick; 
+            
+            Array.from(row.cells).forEach(cell => {
+                const newCell = document.createElement('td');
+                newCell.innerHTML = cell.innerHTML;
+                newCell.style.padding = '15px 0';
+                newRow.appendChild(newCell);
+            });
+            
+            fragment.appendChild(newRow);
+        });
+
+        table.innerHTML = '';
+        table.appendChild(fragment);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const rows = document.querySelectorAll('#empresaTable tr');
+        rows.forEach(row => {
+            row.classList.add('border-bottom');
+            row.style.padding = '15px 0';
+        });
+    });
+
+    window.onload = resetCard;
+    </script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>    
+</body>
+</html>
+<!--  18-07-24 
+Cambios realizados:
+1. Título de la tarjeta:
+   - Original: `Información`
+   - Traducción: `Information`
+
+2. Encabezado de la tarjeta de contacto:
+   - Original: `Seleccione un contacto`
+   - Traducción: `Select a contact`
+
+3. Texto en la tarjeta de contacto por defecto:
+   - Original: `Seleccione un contacto para ver la información detallada`
+   - Traducción: `Select a contact to see detailed information`
+
+4. Datos en el objeto `empresas`:
+   - `AGRICOLA ALTO TRAIGUEN SA`:
+     - `etiqueta`: `Ventas` -> `Sales`
+     - `validada`: `Sí` -> `Yes`
+     - `cargo`: `Gerente de Ventas` -> `Sales Manager`
+   - `ALCIA SERVICIOS LTDA.`:
+     - `etiqueta`: `RR.HH` -> `HR`
+     - `validada`: `Sí` -> `Yes`
+     - `cargo`: `Director de Recursos Humanos` -> `HR Director`
+   - `Servicios de corta de madera`:
+     - `etiqueta`: `Transporte` -> `Transport`
+     - `validada`: `Sí` -> `Yes`
+     - `cargo`: `Supervisor de Transporte` -> `Transport Supervisor`
+   - `ADMINISTRADORA DE RESTAURANTES LIMITADA`:
+     - `etiqueta`: `Gerente de operaciones` -> `Operations Manager`
+     - `validada`: `Sí` -> `Yes`
+     - `cargo`: `Gerente de Operaciones` -> `Operations Manager`
+   - `AGENCIA PRIZE EMPRESA DE SERVICIOS TRANSITORIOS LIMITADA`:
+     - `etiqueta`: `RR.HH` -> `HR`
+     - `validada`: `Sí` -> `Yes`
+     - `cargo`: `Coordinadora de Recursos Humanos` -> `HR Coordinator`
+   - `LATAM Airlines Group`:
+     - `etiqueta`: `Aerolínea` -> `Airline`
+     - `validada`: `Sí` -> `Yes`
+     - `cargo`: `CEO`
+   - `Cencosud`:
+     - `etiqueta`: `Retail`
+     - `validada`: `Sí` -> `Yes`
+     - `cargo`: `Director Comercial` -> `Commercial Director`
+ FINALIZADO -->
+

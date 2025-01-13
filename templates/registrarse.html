@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+        zoom: 150%;
+      }
+
+      .container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        margin-top: 10px;
+      }
+
+      button {
+        background-color: #004aad;
+        color: white;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 5px;
+        margin: 10px 0;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s ease;
+        width: 200px;
+      }
+
+      button:hover {
+        background-color: #004aad;
+      }
+
+      .icon-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .icon {
+        background-color: #004aad;
+        color: white;
+        padding: 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .back-arrow {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        font-size: 24px;
+        cursor: pointer;
+      }
+      #icon2 {
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Registration</h1>
+      <p>¿ Do you want to register as ?</p>
+      <a href={% url 'registrarEmpresa' %}>
+        <button>Business Owner</button>
+      </a>
+      <br />
+      <a href={% url 'personaRegis' %}><button>Person</button></a>
+
+      <i class="fas fa-chevron-left back-arrow"></i>
+    </div>
+
+    <script
+      src="https://kit.fontawesome.com/your-font-awesome-kit-id.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

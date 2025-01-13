@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body class="container mt-3">
+  <nav class="navbar shadow-lg rounded-pill border border-info px-4 py-0">
+    <div class="container-fluid">
+        <nav class="nav nav-pills">
+            <a class="navbar-brand ps-4" href="#">Marketplace</a>
+              <ul class="navbar-nav d-inline">
+                <li class="nav-item d-inline-grid">
+                  <a class="nav-link px-2" href="{% url 'productos' %}">Products</a>
+                </li>
+                <li class="nav-item d-inline-grid">
+                  <a class="nav-link px-2" href="{% url 'servicios' %}">Services</a>
+                </li>
+                <li class="nav-item d-inline-grid">
+                  <a class="nav-link px-2"   href="{% url 'marketplace' %}" style="
+                  background-color: blue;
+                  color: white;">Source Material</a>
+                </li>
+                <li class="nav-item d-inline-grid">
+                  <a class="nav-link px-2" href="{% url 'mercadillo' %}">Donation</a>
+                </li>
+                <li class="nav-item d-inline-grid" >
+                  <a class="nav-link px-2" href="{% url 'rebaja' %}">1 USD</a>
+                </li>
+                <li class="nav-item d-inline-grid">
+                  <a class="nav-link px-2" href="{% url 'gratis' %}">Free</a>
+                </li>
+                <li class="nav-item content-end d-inline-grid">
+                  <a class="nav-link px-2" onclick="window.location.href='http://127.0.0.1/NuevoInicio/public'" >Home</a>
+                </li>
+              </ul>
+        </nav>
+
+              <nav class="navbar navbar-light bg-body me-4">
+                <div class="container-fluid">
+                    <button class="navbar-toggler rounded-pill border-info" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+                </nav>
+                <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">NETGOcios</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                          
+                          <li class="nav-item">
+                              <a class="nav-link" aria-current="page" href="{% url 'marketplace' %}">Marketplace</a>                        
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" aria-current="page" href="{% url 'buscador' %}">Search</a>                        
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'chat' %}" >Chat</a>                        
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'reunion' %}">Meetings</a>                        
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'llamada' %}" >Call</a>                        
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'economico' %}">Stock Market</a>                        
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" aria-current="page" onclick= "window.location.href='http://10.236.5.12:8080/moodle/'">Training</a>                        
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" aria-current="page" href="{% url 'agenda' %}">Contacts</a>                        
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'configuracion' %}">Settings</a>                        
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" aria-current="page" href="{% url 'mercadillo' %}">Outlet</a>                        
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" aria-current="page" href="{% url 'tutoriales' %}" >Tutorials</a>                        
+                          </li>
+                        </ul>
+                    </div>
+                </div>
+            
+    </div>
+    <div class="search-bar-container d-flex justify-content-center mt-2">
+      <select class="category-dropdown">
+        <option value="all">Todas las categorías</option>
+        <option value="electronics">Servicios</option>
+        <option value="books">Productos</option>
+        <option value="fashion">Contrataciones</option>
+        <option value="home">Hogar</option>
+        <option value="sports">Deportes</option>
+      </select>
+      <style>
+        .search-bar-container {
+          width: 100%;
+         
+          height: 50px;
+          margin-bottom:25px;
+          
+        }
+  
+        /* Dropdown de categorías */
+        .category-dropdown {
+          border: 1px solid #ccc;
+          border-radius: 25px 0 0 25px;
+          padding: 10px;
+          font-size: 16px;
+          background: #f8f8f8;
+          width: 190px;
+        }
+  
+        /* Barra de búsqueda */
+        .search-bar {
+          width: 120%;
+          padding: 10px 15px;
+          border: 1px solid #ccc;
+          border-left: none;
+          font-size: 16px;
+        }
+  
+        /* Botón de búsqueda */
+        .search-button {
+          padding: 10px 15px;
+          background-color: #007bff;
+          border: none;
+          color: #fff;
+          font-size: 16px;
+          border-radius: 0 25px 25px 0;
+          cursor: pointer;
+          transition: background-color 0.3s;
+        }
+  
+        .search-button:hover {
+          background-color: #0466ce;
+        }
+      </style>
+      <input
+        type="text"
+        class="search-bar"
+        placeholder="Buscar productos, marcas y más..."
+      />
+      <button class="search-button">🔍</button>
+    </div>
+</nav>
+                <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">NETGOcios</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                      <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" onclick="window.location.href='http://127.0.0.1:3000/'" >VideoPlayer</a>                        
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'marketplace' %}">Marketplace</a>                        
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'buscador' %}">Search</a>                        
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" aria-current="page" href="{% url 'chat' %}" >Chat</a>                        
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" aria-current="page" href="{% url 'reunion' %}">Meetings</a>                        
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" aria-current="page" href="{% url 'llamada' %}" >Call</a>                        
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" aria-current="page" href="{% url 'economico' %}">Stock Market</a>                        
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" aria-current="page" onclick= "window.location.href='http://10.236.5.12:8080/moodle/'">Training</a>                        
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'agenda' %}">Contacts</a>                        
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" aria-current="page" href="{% url 'configuracion' %}">Settings</a>                        
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'mercadillo' %}">Outlet</a>                        
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'tutoriales' %}" >Tutorials</a>                        
+                        </li>
+                      </ul>
+                    </div>
+                </div>
+            
+    </div>
+</nav>
+  <div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
+    <div class="col">
+      <div class="card h-100 border-info mb-3 shadow-lg">
+        <div class="card-header border-info text-center bg-transparent">
+          <p><h4>Company: AceroX</h4></p>
+          <p>Validated Company: No</p>
+          <p>Ratings: 
+            <img src="https://static.vecteezy.com/system/resources/previews/016/016/805/non_2x/four-stars-rating-with-transparent-background-free-png.png" class="img-fluid" width="110px" style="margin-top: -50px; margin-bottom: -45px;">
+          </p>
+          <a class="btn btn-outline-info" href={% url 'llamada' %} role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-headset" viewBox="0 0 16 16">
+              <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" onclick="descarga()" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'agenda' %} role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+              <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'chat' %} role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-text" viewBox="0 0 16 16">
+            <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"/>
+            <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6m0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+          </svg>
+          </a>
+          <a class="btn btn-outline-info" href="https://outlook.office365.com/mail/" role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-at" viewBox="0 0 16 16">
+            <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2zm3.708 6.208L1 11.105V5.383zM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2z"/>
+            <path d="M14.247 14.269c1.01 0 1.587-.857 1.587-2.025v-.21C15.834 10.43 14.64 9 12.52 9h-.035C10.42 9 9 10.36 9 12.432v.214C9 14.82 10.438 16 12.358 16h.044c.594 0 1.018-.074 1.237-.175v-.73c-.245.11-.673.18-1.18.18h-.044c-1.334 0-2.571-.788-2.571-2.655v-.157c0-1.657 1.058-2.724 2.64-2.724h.04c1.535 0 2.484 1.05 2.484 2.326v.118c0 .975-.324 1.39-.639 1.39-.232 0-.41-.148-.41-.42v-2.19h-.906v.569h-.03c-.084-.298-.368-.63-.954-.63-.778 0-1.259.555-1.259 1.4v.528c0 .892.49 1.434 1.26 1.434.471 0 .896-.227 1.014-.643h.043c.118.42.617.648 1.12.648m-2.453-1.588v-.227c0-.546.227-.791.573-.791.297 0 .572.192.572.708v.367c0 .573-.253.744-.564.744-.354 0-.581-.215-.581-.8Z"/>
+          </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'reunion' %} role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-workspace" viewBox="0 0 16 16">
+            <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+            <path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.4 5.4 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2z"/>
+          </svg>
+          </a>
+        </div>
+        <div class="row g-0 h-100">
+          <div class="col-md-4">
+            <div id="carouselExampleSlidesOnly" class="carousel slide object-fit-scale border h-100" data-bs-ride="carousel">
+              <div class="carousel-inner h-100">
+                <div class="carousel-item active h-100">
+                  <img src="https://www.marineshine.co.th/images/content/original-1586503022595.jpg"  class="img-fluid object-fit-scale h-100" alt="...">  
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://oxysupplyperu.com.pe/wp-content/uploads/2021/01/TUBERIA-DE-ACERO-INOXIDABLE-SIN-COSTURA-1.jpg" class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCKBczDclSzjOwvS0LRDNLpRNVor5ex7JVkkv_VNVTbQ&s" class="img-fluid object-fit-scale h-100" alt=" ">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Carbon Steel</h5>
+                <p class="card-text">Carbon steel is a versatile raw material widely used in the manufacturing industry. This material is composed mainly of iron and carbon, with small amounts of other elements such as manganese, phosphorus and sulfur. Carbon steel is characterized by its strength, durability, and ability to be molded into a variety of shapes through casting, rolling, and forging processes. It is used in the manufacture of a wide range of products, including metal structures, tools, machinery and automotive components.Carbon steel is a versatile raw material widely used in the manufacturing industry. This material is composed mainly of iron and carbon, with small amounts of other elements such as manganese, phosphorus and sulfur. Carbon steel is characterized by its strength, durability, and ability to be molded into a variety of shapes through casting, rolling, and forging processes. It is used in the manufacture of a wide range of products, including metal structures, tools, machinery and automotive components.</p>
+                <h5 class= "card-text">1.999 USD</h5>
+                <a href="#" class="btn btn-primary">Buy</a>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 border-info mb-3 shadow-lg">
+        <div class="card-header border-info text-center bg-transparent">
+          <p><h4>Company: NobleRobles</h4></p>
+          <p>Validated Company: Yes</p>
+          <p>Ratings: 
+            <img src="https://static.vecteezy.com/system/resources/previews/016/017/089/non_2x/five-stars-rating-with-transparent-background-free-png.png" class="img-fluid" width="110px" style="margin-top: -50px; margin-bottom: -45px;">
+          </p>
+          <a class="btn btn-outline-info" href={% url 'llamada' %} role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-headset" viewBox="0 0 16 16">
+              <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href="#" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'agenda' %} role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+              <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'chat' %} role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-text" viewBox="0 0 16 16">
+            <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"/>
+            <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6m0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+          </svg>
+          </a>
+          <a class="btn btn-outline-info" href="https://outlook.office365.com/mail/" role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-at" viewBox="0 0 16 16">
+            <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2zm3.708 6.208L1 11.105V5.383zM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2z"/>
+            <path d="M14.247 14.269c1.01 0 1.587-.857 1.587-2.025v-.21C15.834 10.43 14.64 9 12.52 9h-.035C10.42 9 9 10.36 9 12.432v.214C9 14.82 10.438 16 12.358 16h.044c.594 0 1.018-.074 1.237-.175v-.73c-.245.11-.673.18-1.18.18h-.044c-1.334 0-2.571-.788-2.571-2.655v-.157c0-1.657 1.058-2.724 2.64-2.724h.04c1.535 0 2.484 1.05 2.484 2.326v.118c0 .975-.324 1.39-.639 1.39-.232 0-.41-.148-.41-.42v-2.19h-.906v.569h-.03c-.084-.298-.368-.63-.954-.63-.778 0-1.259.555-1.259 1.4v.528c0 .892.49 1.434 1.26 1.434.471 0 .896-.227 1.014-.643h.043c.118.42.617.648 1.12.648m-2.453-1.588v-.227c0-.546.227-.791.573-.791.297 0 .572.192.572.708v.367c0 .573-.253.744-.564.744-.354 0-.581-.215-.581-.8Z"/>
+          </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'reunion' %} role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-workspace" viewBox="0 0 16 16">
+            <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+            <path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.4 5.4 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2z"/>
+          </svg>
+          </a>
+        </div>
+        <div class="row g-0 h-100">     
+            <div class="col-md-4">
+              <div id="carouselExampleSlidesOnly" class="carousel slide object-fit-scale border h-100" data-bs-ride="carousel">
+                <div class="carousel-inner h-100">
+                  <div class="carousel-item active h-100">
+                   <img src="https://m.media-amazon.com/images/I/4107mc8TEcL._AC_UF894,1000_QL80_.jpg"  class="img-fluid object-fit-scale h-100" alt="...">
+                  </div>
+                  <div class="carousel-item h-100">
+                    <img src="https://m.media-amazon.com/images/I/41jvl2FNItL._AC_UF894,1000_QL80_.jpg" class="img-fluid object-fit-scale h-100" alt="...">
+                  </div>
+                  <div class="carousel-item h-100">
+                    <img src="https://maderasconstructor.cl/wp-content/uploads/2023/07/D59E5273-7D65-4BA6-B057-342938631F37_1_105_c.jpeg" class="img-fluid object-fit-scale h-100" alt=" ">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Oak Wood</h5>
+                <p class="card-text">Oak wood is a raw material valued for its beauty, durability and resistance. Sourced from oak trees, this wood is characterized by its warm coloration, distinctive grain, and superior density. Widely used in the manufacture of furniture, flooring, coverings and aging barrels for wines and spirits, oak wood adds a touch of elegance and quality to any construction or interior design project.</p>
+                <h5 class= "card-text">1.999 USD</h5>
+                <a href="#" class="btn btn-primary">Buy</a>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 border-info mb-3 shadow-lg">
+        <div class="card-header border-info text-center bg-transparent">
+          <p><h4>Company: AlumBars</h4></p>
+          <p>Validated Company: Yes</p>
+          <p>Ratings: 
+            <img src="https://static.vecteezy.com/system/resources/previews/016/017/445/non_2x/two-stars-rating-with-transparent-background-free-png.png" class="img-fluid" width="110px" style="margin-top: -50px; margin-bottom: -45px;">
+          </p>
+          <a class="btn btn-outline-info" href={% url 'llamada' %} role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-headset" viewBox="0 0 16 16">
+              <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href="#" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'agenda' %} role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+              <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'chat' %} role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-text" viewBox="0 0 16 16">
+            <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"/>
+            <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6m0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+          </svg>
+          </a>
+          <a class="btn btn-outline-info" href="https://outlook.office365.com/mail/" role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-at" viewBox="0 0 16 16">
+            <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2zm3.708 6.208L1 11.105V5.383zM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2z"/>
+            <path d="M14.247 14.269c1.01 0 1.587-.857 1.587-2.025v-.21C15.834 10.43 14.64 9 12.52 9h-.035C10.42 9 9 10.36 9 12.432v.214C9 14.82 10.438 16 12.358 16h.044c.594 0 1.018-.074 1.237-.175v-.73c-.245.11-.673.18-1.18.18h-.044c-1.334 0-2.571-.788-2.571-2.655v-.157c0-1.657 1.058-2.724 2.64-2.724h.04c1.535 0 2.484 1.05 2.484 2.326v.118c0 .975-.324 1.39-.639 1.39-.232 0-.41-.148-.41-.42v-2.19h-.906v.569h-.03c-.084-.298-.368-.63-.954-.63-.778 0-1.259.555-1.259 1.4v.528c0 .892.49 1.434 1.26 1.434.471 0 .896-.227 1.014-.643h.043c.118.42.617.648 1.12.648m-2.453-1.588v-.227c0-.546.227-.791.573-.791.297 0 .572.192.572.708v.367c0 .573-.253.744-.564.744-.354 0-.581-.215-.581-.8Z"/>
+          </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'reunion' %} role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-workspace" viewBox="0 0 16 16">
+            <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+            <path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.4 5.4 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2z"/>
+          </svg>
+          </a>
+        </div>
+        <div class="row g-0 h-100">
+          <div class="col-md-4">
+            <div id="carouselExampleSlidesOnly" class="carousel slide object-fit-scale border h-100" data-bs-ride="carousel">
+              <div class="carousel-inner h-100">
+                <div class="carousel-item active h-100">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ7L0bZpuy3GhvKjsm65HhISmrujgbHygc-GVv6JlJ9a2S-a6SX8UoOiEOxQSxgXTSORg&usqp=CAU"  class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7VRfhUrrXxoU0ggUjowDiEHP3vbkr4dGL2lTJqxlEOA&s" class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://image.made-in-china.com/155f0j00pJOhvRNzfkoG/Aluminum-Ingot-P1020-Primary-Aluminum-Ingot-Casting-Machine-Virgin-Aluminum-Ingot.jpg" class="img-fluid object-fit-scale h-100" alt=" ">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Cast Aluminum</h5>
+              <p class="card-text">Cast aluminum is a light and strong raw material widely used in the metallurgical industry. Produced through the casting process, molten aluminum is obtained by melting aluminum ingots and pouring the liquid metal into molds for solidification. This material is used in the manufacture of a wide variety of products, including automotive parts, aerospace components, kitchen utensils, packaging and machinery parts, due to its excellent corrosion resistance, thermal conductivity and ease of machining.</p>
+              <h5 class= "card-text">1.999 USD</h5>
+              <a href="#" class="btn btn-primary">Buy</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 border-info mb-3 shadow-lg">
+        <div class="card-header border-info text-center bg-transparent">
+          <p><h4>Company: RePapeles</h4></p>
+          <p>Validated Company: No</p>
+          <p>Ratings: 
+            <img src="https://static.vecteezy.com/system/resources/previews/016/314/363/non_2x/three-stars-rating-with-transparent-background-free-png.png" class="img-fluid" width="110px" style="margin-top: -50px; margin-bottom: -45px;">
+          </p>
+          <a class="btn btn-outline-info" href={% url 'llamada' %} role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-headset" viewBox="0 0 16 16">
+              <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href="#" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'agenda' %} role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+              <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'chat' %} role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-text" viewBox="0 0 16 16">
+            <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"/>
+            <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6m0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+          </svg>
+          </a>
+          <a class="btn btn-outline-info" href="https://outlook.office365.com/mail/" role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-at" viewBox="0 0 16 16">
+            <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2zm3.708 6.208L1 11.105V5.383zM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2z"/>
+            <path d="M14.247 14.269c1.01 0 1.587-.857 1.587-2.025v-.21C15.834 10.43 14.64 9 12.52 9h-.035C10.42 9 9 10.36 9 12.432v.214C9 14.82 10.438 16 12.358 16h.044c.594 0 1.018-.074 1.237-.175v-.73c-.245.11-.673.18-1.18.18h-.044c-1.334 0-2.571-.788-2.571-2.655v-.157c0-1.657 1.058-2.724 2.64-2.724h.04c1.535 0 2.484 1.05 2.484 2.326v.118c0 .975-.324 1.39-.639 1.39-.232 0-.41-.148-.41-.42v-2.19h-.906v.569h-.03c-.084-.298-.368-.63-.954-.63-.778 0-1.259.555-1.259 1.4v.528c0 .892.49 1.434 1.26 1.434.471 0 .896-.227 1.014-.643h.043c.118.42.617.648 1.12.648m-2.453-1.588v-.227c0-.546.227-.791.573-.791.297 0 .572.192.572.708v.367c0 .573-.253.744-.564.744-.354 0-.581-.215-.581-.8Z"/>
+          </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'reunion' %} role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-workspace" viewBox="0 0 16 16">
+            <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+            <path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.4 5.4 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2z"/>
+          </svg>
+          </a>
+        </div>
+        <div class="row g-0 h-100">
+          <div class="col-md-4">
+            <div id="carouselExampleSlidesOnly" class="carousel slide object-fit-scale border h-100" data-bs-ride="carousel">
+              <div class="carousel-inner h-100">
+                <div class="carousel-item active h-100">
+                  <img src="https://tipsdereciclaje.com/wp-content/uploads/2019/09/358ceacfc9032da5cccd5ed9c201a7df.jpg"  class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://materialesecologicos.es/wp-content/uploads/2019/02/folios-papel-reciclado.jpg" class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://www.materialdelaboratorio.top/wp-content/uploads/2020/06/Folios-Reciclados-p.jpg" class="img-fluid object-fit-scale h-100" alt=" ">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Recycled Paper</h5>
+              <p class="card-text">Recycled paper is a sustainable and environmentally friendly raw material that is obtained from used and discarded paper. Through shredding, shredding and bleaching processes, recycled paper is transformed into paper pulp, which is then used to make new paper products, such as cardboard, packaging paper, office paper and toilet paper products. By reducing the amount of waste sent to landfills and minimizing tree cutting, recycled paper helps conserve natural resources and mitigate the environmental impact of the paper industry.</p>
+              <h5 class= "card-text">1.999 USD</h5>
+              <a href="#" class="btn btn-primary">Buy</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 border-info mb-3 shadow-lg">
+        <div class="card-header border-info text-center bg-transparent">
+          <p><h4>Company: All Plastics</h4></p>
+          <p>Validated Company: No</p>
+          <p>Ratings: 
+            <img src="https://static.vecteezy.com/system/resources/previews/016/314/898/large_2x/one-stars-rating-with-transparent-background-free-png.png" class="img-fluid" width="110px" style="margin-top: -50px; margin-bottom: -45px;">
+          </p>
+          <a class="btn btn-outline-info" href={% url 'llamada' %} role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-headset" viewBox="0 0 16 16">
+              <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href="#" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'agenda' %} role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+              <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'chat' %} role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-text" viewBox="0 0 16 16">
+            <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"/>
+            <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6m0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+          </svg>
+          </a>
+          <a class="btn btn-outline-info" href="https://outlook.office365.com/mail/" role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-at" viewBox="0 0 16 16">
+            <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2zm3.708 6.208L1 11.105V5.383zM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2z"/>
+            <path d="M14.247 14.269c1.01 0 1.587-.857 1.587-2.025v-.21C15.834 10.43 14.64 9 12.52 9h-.035C10.42 9 9 10.36 9 12.432v.214C9 14.82 10.438 16 12.358 16h.044c.594 0 1.018-.074 1.237-.175v-.73c-.245.11-.673.18-1.18.18h-.044c-1.334 0-2.571-.788-2.571-2.655v-.157c0-1.657 1.058-2.724 2.64-2.724h.04c1.535 0 2.484 1.05 2.484 2.326v.118c0 .975-.324 1.39-.639 1.39-.232 0-.41-.148-.41-.42v-2.19h-.906v.569h-.03c-.084-.298-.368-.63-.954-.63-.778 0-1.259.555-1.259 1.4v.528c0 .892.49 1.434 1.26 1.434.471 0 .896-.227 1.014-.643h.043c.118.42.617.648 1.12.648m-2.453-1.588v-.227c0-.546.227-.791.573-.791.297 0 .572.192.572.708v.367c0 .573-.253.744-.564.744-.354 0-.581-.215-.581-.8Z"/>
+          </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'reunion' %} role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-workspace" viewBox="0 0 16 16">
+            <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+            <path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.4 5.4 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2z"/>
+          </svg>
+          </a>
+        </div>
+        <div class="row g-0 h-100">
+          <div class="col-md-4">
+            <div id="carouselExampleSlidesOnly" class="carousel slide object-fit-scale border h-100" data-bs-ride="carousel">
+              <div class="carousel-inner h-100">
+                <div class="carousel-item active h-100">
+                  <img src="https://plastigen.cl/wp-content/uploads/2020/11/Diseno-sin-titulo-4.png"  class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://geosynt.cl/wp-content/uploads/2023/05/hdpe.jpg" class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://plastigen.cl/wp-content/uploads/2020/11/robanit.jpg" class="img-fluid object-fit-scale h-100" alt=" ">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">High-Density Polyethylene (HDPE)</h5>
+              <p class="card-text">High-density polyethylene (HDPE) is a type of thermoplastic plastic widely used in a variety of industrial and commercial applications. This material is characterized by its high tensile strength, rigidity, chemical and abrasion resistance, as well as its low moisture absorption and corrosion resistance. It is used in the manufacture of food and beverage containers, pipes and fittings for drinking water and wastewater systems, detergent and chemical bottles, toys, outdoor furniture and automotive components, among other products.</p>
+              <h5 class= "card-text">1.999 USD</h5>
+              <a href="#" class="btn btn-primary">Buy</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 border-info mb-3 shadow-lg">
+        <div class="card-header border-info text-center bg-transparent">
+          <p><h4>Company: Cu&Co Lingotes</h4></p>
+          <p>Validated Company: Yes</p>
+          <p>Ratings: 
+            <img src="https://static.vecteezy.com/system/resources/previews/016/016/805/non_2x/four-stars-rating-with-transparent-background-free-png.png" class="img-fluid" width="110px" style="margin-top: -50px; margin-bottom: -45px;">
+          </p>
+          <a class="btn btn-outline-info" href={% url 'llamada' %} role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-headset" viewBox="0 0 16 16">
+              <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href="#" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'agenda' %} role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+              <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'chat' %} role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-text" viewBox="0 0 16 16">
+            <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"/>
+            <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6m0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+          </svg>
+          </a>
+          <a class="btn btn-outline-info" href="https://outlook.office365.com/mail/" role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-at" viewBox="0 0 16 16">
+            <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2zm3.708 6.208L1 11.105V5.383zM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2z"/>
+            <path d="M14.247 14.269c1.01 0 1.587-.857 1.587-2.025v-.21C15.834 10.43 14.64 9 12.52 9h-.035C10.42 9 9 10.36 9 12.432v.214C9 14.82 10.438 16 12.358 16h.044c.594 0 1.018-.074 1.237-.175v-.73c-.245.11-.673.18-1.18.18h-.044c-1.334 0-2.571-.788-2.571-2.655v-.157c0-1.657 1.058-2.724 2.64-2.724h.04c1.535 0 2.484 1.05 2.484 2.326v.118c0 .975-.324 1.39-.639 1.39-.232 0-.41-.148-.41-.42v-2.19h-.906v.569h-.03c-.084-.298-.368-.63-.954-.63-.778 0-1.259.555-1.259 1.4v.528c0 .892.49 1.434 1.26 1.434.471 0 .896-.227 1.014-.643h.043c.118.42.617.648 1.12.648m-2.453-1.588v-.227c0-.546.227-.791.573-.791.297 0 .572.192.572.708v.367c0 .573-.253.744-.564.744-.354 0-.581-.215-.581-.8Z"/>
+          </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'reunion' %} role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-workspace" viewBox="0 0 16 16">
+            <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+            <path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.4 5.4 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2z"/>
+          </svg>
+          </a>
+        </div>
+        <div class="row g-0 h-100">
+          <div class="col-md-4">
+            <div id="carouselExampleSlidesOnly" class="carousel slide object-fit-scale border h-100" data-bs-ride="carousel">
+              <div class="carousel-inner h-100">
+                <div class="carousel-item active h-100">
+                  <img src="https://s.alicdn.com/@sc04/kf/Ud546b4a1bca54fd49abb1d25cf4604d8A.jpg_720x720q50.jpg"  class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://http2.mlstatic.com/D_NQ_NP_942507-MLC74651766914_022024-O.webp" class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://thumbs.dreamstime.com/b/lingotes-de-cobre-57287200.jpg" class="img-fluid object-fit-scale h-100" alt=" ">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Copper Ingots</h5>
+              <p class="card-text">Copper ingot is a metallic raw material used in a wide range of industrial and commercial applications due to its excellent conductive properties and corrosion resistance. This metal is obtained through copper ore extraction and refining processes, and is melted into ingots for subsequent processing and manufacturing. Copper ingots are used in the manufacture of electrical cables, electronic components, plumbing pipes and fittings, heating and cooling equipment, hand tools and coins, among other products.</p>
+              <h5 class= "card-text">1.999 USD</h5>
+              <a href="#" class="btn btn-primary">Buy</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 border-info mb-3 shadow-lg">
+        <div class="card-header border-info text-center bg-transparent">
+          <p><h4>Company: IronCraft</h4></p>
+          <p>Validated Company: Yes</p>
+          <p>Ratings: 
+            <img src="https://static.vecteezy.com/system/resources/previews/016/016/805/non_2x/four-stars-rating-with-transparent-background-free-png.png" class="img-fluid" width="110px" style="margin-top: -50px; margin-bottom: -45px;">
+          </p>
+          <a class="btn btn-outline-info" href={% url 'llamada' %} role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-headset" viewBox="0 0 16 16">
+              <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href="#" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'agenda' %} role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+              <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'chat' %} role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-text" viewBox="0 0 16 16">
+            <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"/>
+            <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6m0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+          </svg>
+          </a>
+          <a class="btn btn-outline-info" href="https://outlook.office365.com/mail/" role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-at" viewBox="0 0 16 16">
+            <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2zm3.708 6.208L1 11.105V5.383zM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2z"/>
+            <path d="M14.247 14.269c1.01 0 1.587-.857 1.587-2.025v-.21C15.834 10.43 14.64 9 12.52 9h-.035C10.42 9 9 10.36 9 12.432v.214C9 14.82 10.438 16 12.358 16h.044c.594 0 1.018-.074 1.237-.175v-.73c-.245.11-.673.18-1.18.18h-.044c-1.334 0-2.571-.788-2.571-2.655v-.157c0-1.657 1.058-2.724 2.64-2.724h.04c1.535 0 2.484 1.05 2.484 2.326v.118c0 .975-.324 1.39-.639 1.39-.232 0-.41-.148-.41-.42v-2.19h-.906v.569h-.03c-.084-.298-.368-.63-.954-.63-.778 0-1.259.555-1.259 1.4v.528c0 .892.49 1.434 1.26 1.434.471 0 .896-.227 1.014-.643h.043c.118.42.617.648 1.12.648m-2.453-1.588v-.227c0-.546.227-.791.573-.791.297 0 .572.192.572.708v.367c0 .573-.253.744-.564.744-.354 0-.581-.215-.581-.8Z"/>
+          </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'reunion' %} role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-workspace" viewBox="0 0 16 16">
+            <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+            <path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.4 5.4 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2z"/>
+          </svg>
+          </a>
+        </div>
+        <div class="row g-0 h-100">
+          <div class="col-md-4">
+            <div id="carouselExampleSlidesOnly" class="carousel slide object-fit-scale border h-100" data-bs-ride="carousel">
+              <div class="carousel-inner h-100">
+                <div class="carousel-item active h-100">
+                  <img src="https://i.namu.wiki/i/atKZ3NH3myv7Y89E7riBtyOHovzMw6-H5aOjrp6rWh_BjZW7opjFXPJxQ9UmEHBuwOlNDpvCQMNHIgoOinrA9A.webp"  class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQj3KC0OLPpwJIa1iXVy4iLgPcl_NccNiZnpUYtt87rbJ5jyI32f4redlrncl8kzCfBfIU&usqp=CAU" class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://s.alicdn.com/@sc04/kf/H3d34a4ff9040426fa22563f69a1cfa09b.jpg" class="img-fluid object-fit-scale h-100" alt=" ">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Wrought Iron Bars</h5>
+              <p class="card-text">IronCraft™ offers high-purity wrought iron bars, meticulously crafted from high-quality iron for strength and durability. Perfect for architectural design projects both indoors and outdoors, our bars are synonymous with security in any space. </p>
+              <h5 class= "card-text">1.999 USD</h5>
+              <a href="#" class="btn btn-primary">Buy</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 border-info mb-3 shadow-lg">
+        <div class="card-header border-info text-center bg-transparent">
+          <p><h4>Company: PetraFuel</h4></p>
+          <p>Validated Company: No</p>
+          <p>Ratings: 
+            <img src="https://static.vecteezy.com/system/resources/previews/016/017/445/non_2x/two-stars-rating-with-transparent-background-free-png.png" class="img-fluid" width="110px" style="margin-top: -50px; margin-bottom: -45px;">
+          </p>
+          <a class="btn btn-outline-info" href={% url 'llamada' %} role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-headset" viewBox="0 0 16 16">
+              <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href="#" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'agenda' %} role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+              <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'chat' %} role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-text" viewBox="0 0 16 16">
+            <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"/>
+            <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6m0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+          </svg>
+          </a>
+          <a class="btn btn-outline-info" href="https://outlook.office365.com/mail/" role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-at" viewBox="0 0 16 16">
+            <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2zm3.708 6.208L1 11.105V5.383zM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2z"/>
+            <path d="M14.247 14.269c1.01 0 1.587-.857 1.587-2.025v-.21C15.834 10.43 14.64 9 12.52 9h-.035C10.42 9 9 10.36 9 12.432v.214C9 14.82 10.438 16 12.358 16h.044c.594 0 1.018-.074 1.237-.175v-.73c-.245.11-.673.18-1.18.18h-.044c-1.334 0-2.571-.788-2.571-2.655v-.157c0-1.657 1.058-2.724 2.64-2.724h.04c1.535 0 2.484 1.05 2.484 2.326v.118c0 .975-.324 1.39-.639 1.39-.232 0-.41-.148-.41-.42v-2.19h-.906v.569h-.03c-.084-.298-.368-.63-.954-.63-.778 0-1.259.555-1.259 1.4v.528c0 .892.49 1.434 1.26 1.434.471 0 .896-.227 1.014-.643h.043c.118.42.617.648 1.12.648m-2.453-1.588v-.227c0-.546.227-.791.573-.791.297 0 .572.192.572.708v.367c0 .573-.253.744-.564.744-.354 0-.581-.215-.581-.8Z"/>
+          </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'reunion' %} role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-workspace" viewBox="0 0 16 16">
+            <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+            <path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.4 5.4 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2z"/>
+          </svg>
+          </a>
+        </div>
+        <div class="row g-0 h-100">
+          <div class="col-md-4">
+            <div id="carouselExampleSlidesOnly" class="carousel slide object-fit-scale border h-100" data-bs-ride="carousel">
+              <div class="carousel-inner h-100">
+                <div class="carousel-item active h-100">
+                  <img src="https://img.freepik.com/vector-premium/logotipo-combustible-ecologico-concepto-hoja_11481-955.jpg"  class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://image.slidesdocs.com/responsive-images/background/eco-conscious-fuel-idea-white-with-3d-rendered-green-metal-jerry-can-and-recycle-logo-powerpoint-background_cadb636708__960_540.jpg" class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://media.adeo.com/marketplace/MKP/83455709/461596927cc1e2ef3b94b567cae1e31b.jpeg?width=650&height=650&format=jpg&quality=80&fit=bounds" class="img-fluid object-fit-scale h-100" alt=" ">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Ecological Fuel</h5>
+              <p class="card-text">We develop an ecological fuel solution derived from renewable petroleum sources. With an innovative production process that minimizes carbon emissions, our fuel offers reliable and efficient performance, while reducing environmental impact. Ideal for vehicles and heating systems looking for a sustainable alternative.</p>
+              <h5 class= "card-text">1.999 USD</h5>
+              <a href="#" class="btn btn-primary">Buy</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 border-info mb-3 shadow-lg">
+        <div class="card-header border-info text-center bg-transparent">
+          <p><h4>Company: BioPlank</h4></p>
+          <p>Validated Company: Yes</p>
+          <p>Ratings: 
+            <img src="https://static.vecteezy.com/system/resources/previews/016/017/089/non_2x/five-stars-rating-with-transparent-background-free-png.png" class="img-fluid" width="110px" style="margin-top: -50px; margin-bottom: -45px;">
+          </p>
+          <a class="btn btn-outline-info" href={% url 'llamada' %} role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-headset" viewBox="0 0 16 16">
+              <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href="#" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'agenda' %} role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+              <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'chat' %} role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-text" viewBox="0 0 16 16">
+            <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"/>
+            <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6m0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+          </svg>
+          </a>
+          <a class="btn btn-outline-info" href="https://outlook.office365.com/mail/" role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-at" viewBox="0 0 16 16">
+            <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2zm3.708 6.208L1 11.105V5.383zM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2z"/>
+            <path d="M14.247 14.269c1.01 0 1.587-.857 1.587-2.025v-.21C15.834 10.43 14.64 9 12.52 9h-.035C10.42 9 9 10.36 9 12.432v.214C9 14.82 10.438 16 12.358 16h.044c.594 0 1.018-.074 1.237-.175v-.73c-.245.11-.673.18-1.18.18h-.044c-1.334 0-2.571-.788-2.571-2.655v-.157c0-1.657 1.058-2.724 2.64-2.724h.04c1.535 0 2.484 1.05 2.484 2.326v.118c0 .975-.324 1.39-.639 1.39-.232 0-.41-.148-.41-.42v-2.19h-.906v.569h-.03c-.084-.298-.368-.63-.954-.63-.778 0-1.259.555-1.259 1.4v.528c0 .892.49 1.434 1.26 1.434.471 0 .896-.227 1.014-.643h.043c.118.42.617.648 1.12.648m-2.453-1.588v-.227c0-.546.227-.791.573-.791.297 0 .572.192.572.708v.367c0 .573-.253.744-.564.744-.354 0-.581-.215-.581-.8Z"/>
+          </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'reunion' %} role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-workspace" viewBox="0 0 16 16">
+            <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+            <path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.4 5.4 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2z"/>
+          </svg>
+          </a>
+        </div>
+        <div class="row g-0 h-100">
+          <div class="col-md-4">
+            <div id="carouselExampleSlidesOnly" class="carousel slide object-fit-scale border h-100" data-bs-ride="carousel">
+              <div class="carousel-inner h-100">
+                <div class="carousel-item active h-100">
+                  <img src="https://s3.amazonaws.com/bsalemarket/79042/product/alb02264default.jpeg"  class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuE8Na5rRUxltHIpJNMS8il0Llz4MRxK9Oz--x6vu1hA&s" class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://image.jimcdn.com/app/cms/image/transf/dimension=328x10000:format=jpg/path/sf2217758f40e4116/image/ifc634517d8769778/version/1541519685/image.jpg" class="img-fluid object-fit-scale h-100" alt=" ">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Recycled Wood</h5>
+              <p class="card-text">BioPlank™ features recycled wood boards, made from reclaimed and responsibly processed material. Each board features a unique history and natural patina, adding rustic charm to construction and interior design projects. A conscious choice for those committed to the preservation of forest resources.</p>
+              <h5 class= "card-text">1.999 USD</h5>
+              <a href="#" class="btn btn-primary">Buy</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 border-info mb-3 shadow-lg">
+        <div class="card-header border-info text-center bg-transparent">
+          <p><h4>Company: GoldenGrain</h4></p>
+          <p>Validated Company: No</p>
+          <p>Ratings: 
+            <img src="https://static.vecteezy.com/system/resources/previews/016/017/445/non_2x/two-stars-rating-with-transparent-background-free-png.png" class="img-fluid" width="110px" style="margin-top: -50px; margin-bottom: -45px;">
+          </p>
+          <a class="btn btn-outline-info" href={% url 'llamada' %} role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-headset" viewBox="0 0 16 16">
+              <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href="#" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'agenda' %} role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+              <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'chat' %} role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-text" viewBox="0 0 16 16">
+            <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"/>
+            <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6m0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+          </svg>
+          </a>
+          <a class="btn btn-outline-info" href="https://outlook.office365.com/mail/" role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-at" viewBox="0 0 16 16">
+            <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2zm3.708 6.208L1 11.105V5.383zM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2z"/>
+            <path d="M14.247 14.269c1.01 0 1.587-.857 1.587-2.025v-.21C15.834 10.43 14.64 9 12.52 9h-.035C10.42 9 9 10.36 9 12.432v.214C9 14.82 10.438 16 12.358 16h.044c.594 0 1.018-.074 1.237-.175v-.73c-.245.11-.673.18-1.18.18h-.044c-1.334 0-2.571-.788-2.571-2.655v-.157c0-1.657 1.058-2.724 2.64-2.724h.04c1.535 0 2.484 1.05 2.484 2.326v.118c0 .975-.324 1.39-.639 1.39-.232 0-.41-.148-.41-.42v-2.19h-.906v.569h-.03c-.084-.298-.368-.63-.954-.63-.778 0-1.259.555-1.259 1.4v.528c0 .892.49 1.434 1.26 1.434.471 0 .896-.227 1.014-.643h.043c.118.42.617.648 1.12.648m-2.453-1.588v-.227c0-.546.227-.791.573-.791.297 0 .572.192.572.708v.367c0 .573-.253.744-.564.744-.354 0-.581-.215-.581-.8Z"/>
+          </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'reunion' %} role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-workspace" viewBox="0 0 16 16">
+            <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+            <path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.4 5.4 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2z"/>
+          </svg>
+          </a>
+        </div>
+        <div class="row g-0 h-100">
+          <div class="col-md-4">
+            <div id="carouselExampleSlidesOnly" class="carousel slide object-fit-scale border h-100" data-bs-ride="carousel">
+              <div class="carousel-inner h-100">
+                <div class="carousel-item active h-100">
+                  <img src="https://tiendaorigennatural.cl/wp-content/uploads/2021/09/harina-integral-el-abasto-de-chile.jpg"  class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://www.arepacuadrada.cl/wp-content/uploads/2021/07/harina-trigo.jpg" class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://assets.elgourmet.com/wp-content/uploads/2023/03/diccio_901.jpg.webp" class="img-fluid object-fit-scale h-100" alt=" ">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Organic Wheat Flour</h5>
+              <p class="card-text">GoldenGrain™ offers organic wheat flour, milled from sustainably grown grains without the use of pesticides or synthetic fertilizers. With a distinctive aroma and flavor, our flour is ideal for the preparation of high-quality breads, cakes and baked goods. Bring the delicious flavor of nature to your kitchen while supporting responsible agricultural practices.</p>
+              <h5 class= "card-text">1.999 USD</h5>
+              <a href="#" class="btn btn-primary">Buy</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <style>                                 
+     .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #004AAD;
+      }
+      .link-info{
+          color: #004AAD;
+
+      }
+      .border-info{
+          border-color: #004AAD !important;
+      }
+      .btn-primary {
+      color: #fff;
+      background-color: #004AAD;
+      border-color: #004AAD;
+      }
+      .nav-link {
+      color: #004AAD;
+      }
+      .btn-outline-info {
+        background-color: #004AAD;
+        color: white;
+      }
+      img, svg {
+    margin-bottom: 3px;
+}
+      .nav-pills .nav-link.active{
+        background: #004AAD;
+      }
+      .btn-outline-success {
+    --bs-btn-color: #004AAD;
+    --bs-btn-border-color: #004AAD;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #004AAD;
+    --bs-btn-hover-border-color: #004AAD;
+    --bs-btn-focus-shadow-rgb: 25, 135, 84;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #004AAD;
+    --bs-btn-active-border-color: #004AAD;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #004AAD;
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: #004AAD;
+    --bs-gradient: none;
+}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('bi bi-download').forEach(function (element) {
+      element.addEventListener('click', function (e) {
+          e.preventDefault(); // Evita que el enlace siga su comportamiento predeterminado
+
+          // Obtener el contenido de la tarjeta padre del enlace clicado
+          const cardContent = e.target.closest('.card').innerText;
+
+          // Generar el PDF usando jsPDF
+          const { jsPDF } = window.jspdf;
+          const doc = new jsPDF();
+          doc.text(cardContent, 10, 10);
+
+          // Guardar el archivo PDF
+          doc.save('informacion_tarjeta.pdf');
+      });
+  });
+});
+</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.6.0/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

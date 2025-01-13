@@ -1,0 +1,132 @@
+
+<nav class="navbar navbar-collapse shadow-lg rounded-pill border border-info px-4 py-0 mx-5" >
+    <div class="container-fluid">
+        <nav class="nav nav-pills">
+            <a class="navbar-brand nav-link active rounded-pill" id='navbar-brand' href="#">Buscador</a>
+           
+            <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class='navbar-nav'>
+                <li class="nav-item"><a class="navbar-brand nav-link active rounded-pill" href="{% url 'agenda' %}">Contacts</a></li>
+                <li class="nav-item"><a class="navbar-brand nav-link active rounded-pill" href="{% url 'reunion' %}">Meetings</a></li>
+                <li class="nav-item" ><a class="navbar-brand nav-link active rounded-pill" href="{% url 'llamada' %}">Call</a></li>
+                <li class="nav-item"><a class="navbar-brand nav-link active rounded-pill" href="{% url 'economico' %}">Stock Market</a></li>
+                <li class="nav-item"><a class="navbar-brand nav-link active rounded-pill" href="{% url 'moodle' %}">Training</a></li>
+                <li class="nav-item"><a class="navbar-brand nav-link active rounded-pill" href="{% url 'configuracion' %}">Settings</a></li>
+                <li class="nav-item"><a class="navbar-brand nav-link active rounded-pill" href="{% url 'chat' %}">Chat</a></li>
+                <li class="nav-item"><a class="navbar-brand nav-link active rounded-pill" href="{% url 'tutoriales' %}">Tutorials</a></li>
+            </ul>
+            </div>
+            <div  id="home"><a class="nav-link link-info" style="color: #004AAD !important; " onclick="window.location.href='http://127.0.0.1/NuevoInicio/public'">Home</a></div>
+           
+        </nav>
+        <nav class="navbar navbar-light bg-body">
+            <div class="container-fluid">
+                <button class="navbar-toggler rounded-pill border-info" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </nav>
+            <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasScrollingLabel">NETGOcios</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                       
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'marketplace' %}">Marketplace</a>                        
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'buscador' %}">Search</a>                        
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" aria-current="page" href="{% url 'chat' %}" >Chat</a>                        
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" aria-current="page" href="{% url 'reunion' %}">Meetings</a>                        
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" aria-current="page" href="{% url 'llamada' %}" >Call</a>                        
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" aria-current="page" href="{% url 'economico' %}">Stock Market</a>                        
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" aria-current="page" onclick= "window.location.href='http://10.236.5.12:8080/moodle/'">Training</a>                        
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'agenda' %}">Contacts</a>                        
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" aria-current="page" href="{% url 'configuracion' %}">Settings</a>                        
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'mercadillo' %}">Outlet</a>                        
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'tutoriales' %}" >Tutorials</a>                        
+                        </li>
+                      </ul>
+                </div>
+            </div>
+    </div>
+</nav>
+<style>                                 
+    .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+   color: #fff;
+   background-color: #004AAD;
+     }
+     .link-info{
+         color: #004AAD;
+
+     }
+     .border-info{
+         border-color: #004AAD !important;
+     }
+     .btn-primary {
+     color: #fff;
+     background-color: #004AAD;
+     border-color: #004AAD;
+     }
+     .nav-link {
+     color: #004AAD;
+     }
+
+     .element.style{
+        background-color: #004AAD;
+
+     }
+</style>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const brandElement = document.getElementById('navbar-brand');
+        const url = window.location.pathname;
+
+        if(url.includes('agenda')){
+            brandElement.textContent = 'Contacts';
+
+        } else if (url.includes('llamada')){
+            brandElement.textContent = 'Call';
+
+        } else if (url.includes('economico')){
+            brandElement.textContent = 'Stock Market';
+
+        } else if(url.includes('reunion')){
+            brandElement.textContent = 'Meetings';
+
+        } else if(url.includes('editar')){
+            brandElement.textContent = 'Agenda';
+
+        } else if(url.includes('chat')){
+            brandElement.textContent = 'Chat NETGOcios';
+
+        }else if(url.includes('tutoriales')){
+            brandElement.textContent = 'Tutorials';
+
+        }else{
+            brandElement.textContent = 'Search';
+        }
+
+    });
+</script>

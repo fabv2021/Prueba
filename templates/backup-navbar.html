@@ -1,0 +1,82 @@
+<nav class="navbar shadow-lg rounded-pill border border-info px-4 py-0">
+    <div class="container-fluid">
+        <nav class="nav nav-pills">
+            <a class="navbar-brand ps-4" href="#">Marketplace</a>
+              <ul class="navbar-nav d-inline">
+                <li class="nav-item d-inline-grid">
+                  <a class="nav-link active rounded-pill text-bg-primary px-2"  href="{% url 'marketplace' %}">Materia Prima</a>
+                </li>
+                <li class="nav-item d-inline-grid">
+                  <a class="nav-link px-2" href="{% url 'productos' %}">Productos</a>
+                </li>
+                <li class="nav-item d-inline-grid">
+                  <a class="nav-link px-2" href="{% url 'servicios' %}">Servicios</a>
+                </li>
+                <li class="nav-item d-inline-grid">
+                  <a class="nav-link px-2" href="{% url 'cooperativo' %}">Venta Cooperativa</a>
+                </li>
+                <li class="nav-item content-end d-inline-grid">
+                  <a class="nav-link px-2" href="{% url 'home' %}">Home</a>
+                </li>
+              </ul>
+        </nav>
+              <form class="d-flex ms-5" role="search">
+                <input class="form-control me-2" type="search" placeholder="¿Qué necesitas?" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Buscar</button>
+              </form>
+              <nav class="navbar navbar-light bg-body me-4">
+                <div class="container-fluid">
+                    <button class="navbar-toggler rounded-pill border-info" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+                </nav>
+                <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">NETGOcios</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" onclick="window.location.href='http://127.0.0.1:3000/'">Visualizador Videos y Fotos</a>                        
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="{% url 'marketplace' %}">Marketplace</a>                        
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="{% url 'buscador' %}">Buscador</a>                        
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="{% url 'agenda' %}">Contactos</a>                        
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="{% url 'reunion' %}" >Sala de Reunión</a>                        
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="{% url 'llamada' %}" >Llamada</a>                        
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="{% url 'economico' %}">Indicadores Económicos</a>                        
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" onclick= "window.location.href='http://10.236.5.12:8080/moodle/'">Capacitación</a>                        
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="{% url 'mercadillo' %}">Mercadillo</a>                        
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" >Configuración</a>                        
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" >Ayuda</a>                        
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" >Tutoriales de Funcionamiento</a>                        
+                             </li>
+                        </ul>
+                    </div>
+                </div>
+            
+    </div>
+</nav>

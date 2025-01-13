@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body class="container mt-3">
+  <nav class="navbar shadow-lg rounded-pill border border-info px-4 py-0">
+    <div class="container-fluid">
+        <nav class="nav nav-pills">
+            <a class="navbar-brand ps-4" href="#">Marketplace</a>
+              <ul class="navbar-nav d-inline">
+                <li class="nav-item d-inline-grid">
+                  <a class="nav-link px-2" href="{% url 'productos' %}" style="
+                  background-color: blue;
+                  color: white;" >Products</a>
+                </li>
+                <li class="nav-item d-inline-grid">
+                  <a class="nav-link px-2" href="{% url 'servicios' %}">Services</a>
+                </li>
+                <li class="nav-item d-inline-grid">
+                  <a class="nav-link px-2"   href="{% url 'marketplace' %}">Source Material</a>
+                </li>
+                <li class="nav-item d-inline-grid">
+                  <a class="nav-link px-2" href="{% url 'mercadillo' %}">Donation</a>
+                </li>
+                <li class="nav-item d-inline-grid" >
+                  <a class="nav-link px-2" href="{% url 'rebaja' %}">1 USD</a>
+                </li>
+                <li class="nav-item d-inline-grid">
+                  <a class="nav-link px-2" href="{% url 'gratis' %}">Free</a>
+                </li>
+                <li class="nav-item content-end d-inline-grid">
+                  <a class="nav-link px-2" onclick="window.location.href='http://127.0.0.1/NuevoInicio/public'" >Home</a>
+                </li>
+              </ul>
+        </nav>
+
+              <nav class="navbar navbar-light bg-body me-4">
+                <div class="container-fluid">
+                    <button class="navbar-toggler rounded-pill border-info" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+                </nav>
+                <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">NETGOcios</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                          
+                          <li class="nav-item">
+                              <a class="nav-link" aria-current="page" href="{% url 'marketplace' %}">Marketplace</a>                        
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" aria-current="page" href="{% url 'buscador' %}">Search</a>                        
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'chat' %}" >Chat</a>                        
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'reunion' %}">Meetings</a>                        
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'llamada' %}" >Call</a>                        
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'economico' %}">Stock Market</a>                        
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" aria-current="page" onclick= "window.location.href='http://10.236.5.12:8080/moodle/'">Training</a>                        
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" aria-current="page" href="{% url 'agenda' %}">Contacts</a>                        
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'configuracion' %}">Settings</a>                        
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" aria-current="page" href="{% url 'mercadillo' %}">Outlet</a>                        
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" aria-current="page" href="{% url 'tutoriales' %}" >Tutorials</a>                        
+                          </li>
+                        </ul>
+                    </div>
+                </div>
+            
+    </div>
+    <div class="search-bar-container d-flex justify-content-center mt-2">
+      <select class="category-dropdown">
+        <option value="all">Todas las categorías</option>
+        <option value="electronics">Servicios</option>
+        <option value="books">Productos</option>
+        <option value="fashion">Contrataciones</option>
+        <option value="home">Hogar</option>
+        <option value="sports">Deportes</option>
+      </select>
+      <style>
+        .search-bar-container {
+          width: 100%;
+         
+          height: 50px;
+          margin-bottom:25px;
+          
+        }
+  
+        /* Dropdown de categorías */
+        .category-dropdown {
+          border: 1px solid #ccc;
+          border-radius: 25px 0 0 25px;
+          padding: 10px;
+          font-size: 16px;
+          background: #f8f8f8;
+          width: 190px;
+        }
+  
+        /* Barra de búsqueda */
+        .search-bar {
+          width: 120%;
+          padding: 10px 15px;
+          border: 1px solid #ccc;
+          border-left: none;
+          font-size: 16px;
+        }
+  
+        /* Botón de búsqueda */
+        .search-button {
+          padding: 10px 15px;
+          background-color: #007bff;
+          border: none;
+          color: #fff;
+          font-size: 16px;
+          border-radius: 0 25px 25px 0;
+          cursor: pointer;
+          transition: background-color 0.3s;
+        }
+  
+        .search-button:hover {
+          background-color: #0466ce;
+        }
+      </style>
+      <input
+        type="text"
+        class="search-bar"
+        placeholder="Buscar productos, marcas y más..."
+      />
+      <button class="search-button">🔍</button>
+    </div>
+</nav>
+  <div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
+    <div class="col">
+      <div class="card h-100 border-info mb-3 shadow-lg">
+        <div class="card-header border-info text-center bg-transparent">
+          <p><h4>Company: iRobotics</h4></p>
+          <p>Validated Company: Yes</p>
+          <p>Ratings: 
+            <img src="https://static.vecteezy.com/system/resources/previews/016/017/445/non_2x/two-stars-rating-with-transparent-background-free-png.png" class="img-fluid" width="110px" style="margin-top: -50px; margin-bottom: -45px;">
+          </p>
+          <a class="btn btn-outline-info" href={% url 'llamada' %} role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-headset" viewBox="0 0 16 16">
+              <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href="#" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'agenda' %} role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+              <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'chat' %} role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-text" viewBox="0 0 16 16">
+            <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"/>
+            <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6m0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+          </svg>
+          </a>
+          <a class="btn btn-outline-info" href="https://outlook.office365.com/mail/" role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-at" viewBox="0 0 16 16">
+            <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2zm3.708 6.208L1 11.105V5.383zM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2z"/>
+            <path d="M14.247 14.269c1.01 0 1.587-.857 1.587-2.025v-.21C15.834 10.43 14.64 9 12.52 9h-.035C10.42 9 9 10.36 9 12.432v.214C9 14.82 10.438 16 12.358 16h.044c.594 0 1.018-.074 1.237-.175v-.73c-.245.11-.673.18-1.18.18h-.044c-1.334 0-2.571-.788-2.571-2.655v-.157c0-1.657 1.058-2.724 2.64-2.724h.04c1.535 0 2.484 1.05 2.484 2.326v.118c0 .975-.324 1.39-.639 1.39-.232 0-.41-.148-.41-.42v-2.19h-.906v.569h-.03c-.084-.298-.368-.63-.954-.63-.778 0-1.259.555-1.259 1.4v.528c0 .892.49 1.434 1.26 1.434.471 0 .896-.227 1.014-.643h.043c.118.42.617.648 1.12.648m-2.453-1.588v-.227c0-.546.227-.791.573-.791.297 0 .572.192.572.708v.367c0 .573-.253.744-.564.744-.354 0-.581-.215-.581-.8Z"/>
+          </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'reunion' %} role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-workspace" viewBox="0 0 16 16">
+            <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+            <path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.4 5.4 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2z"/>
+          </svg>
+          </a>
+        </div>
+        <div class="row g-0 h-100">
+          <div class="col-md-4">
+            <div id="carouselExampleSlidesOnly" class="carousel slide object-fit-scale border h-100" data-bs-ride="carousel">
+              <div class="carousel-inner h-100">
+                <div class="carousel-item active h-100">
+                  <img src="https://falabella.scene7.com/is/image/Falabella/gsc_121747989_3167312_1?wid=800&hei=800&qlt=70"  class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://d856dqe0kpg80.cloudfront.net/25349-medium_default/aspiradora-robot-inteligente-keiphone-keiminator-wifi.jpg" class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://falabella.scene7.com/is/image/Falabella/8001294_1?wid=1500&hei=1500&qlt=70" class="img-fluid object-fit-scale h-100" alt=" ">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">iRobot Roomba 980</h5>
+              <p class="card-text">Simplify your daily life with the Roomba 980, a smart robot vacuum cleaner that keeps your floors spotless without you having to lift a finger. Equipped with smart visual navigation, this device efficiently maps and cleans your entire home, even in corners and under furniture. With its intuitive mobile app, you can easily schedule and monitor cleaning tasks from anywhere.</p>
+              <h5 class= "card-text">1.999 USD</h5>
+              <a href="#" class="btn btn-primary">Buy</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 border-info mb-3 shadow-lg">
+        <div class="card-header border-info text-center bg-transparent">
+          <p><h4>Company: Brekit</h4></p>
+          <p>Validated Company: No</p>
+          <p>Ratings: 
+            <img src="https://static.vecteezy.com/system/resources/previews/016/314/363/non_2x/three-stars-rating-with-transparent-background-free-png.png" class="img-fluid" width="110px" style="margin-top: -50px; margin-bottom: -45px;">
+          </p>
+          <a class="btn btn-outline-info" href={% url 'llamada' %} role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-headset" viewBox="0 0 16 16">
+              <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href="#" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'agenda' %} role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+              <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'chat' %} role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-text" viewBox="0 0 16 16">
+            <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"/>
+            <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6m0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+          </svg>
+          </a>
+          <a class="btn btn-outline-info" href="https://outlook.office365.com/mail/" role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-at" viewBox="0 0 16 16">
+            <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2zm3.708 6.208L1 11.105V5.383zM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2z"/>
+            <path d="M14.247 14.269c1.01 0 1.587-.857 1.587-2.025v-.21C15.834 10.43 14.64 9 12.52 9h-.035C10.42 9 9 10.36 9 12.432v.214C9 14.82 10.438 16 12.358 16h.044c.594 0 1.018-.074 1.237-.175v-.73c-.245.11-.673.18-1.18.18h-.044c-1.334 0-2.571-.788-2.571-2.655v-.157c0-1.657 1.058-2.724 2.64-2.724h.04c1.535 0 2.484 1.05 2.484 2.326v.118c0 .975-.324 1.39-.639 1.39-.232 0-.41-.148-.41-.42v-2.19h-.906v.569h-.03c-.084-.298-.368-.63-.954-.63-.778 0-1.259.555-1.259 1.4v.528c0 .892.49 1.434 1.26 1.434.471 0 .896-.227 1.014-.643h.043c.118.42.617.648 1.12.648m-2.453-1.588v-.227c0-.546.227-.791.573-.791.297 0 .572.192.572.708v.367c0 .573-.253.744-.564.744-.354 0-.581-.215-.581-.8Z"/>
+          </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'reunion' %} role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-workspace" viewBox="0 0 16 16">
+            <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+            <path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.4 5.4 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2z"/>
+          </svg>
+          </a>
+        </div>
+        <div class="row g-0 h-100">
+          <div class="col-md-4">
+            <div id="carouselExampleSlidesOnly" class="carousel slide object-fit-scale border h-100" data-bs-ride="carousel">
+              <div class="carousel-inner h-100">
+                <div class="carousel-item active h-100">
+                  <img src="https://rimage.ripley.cl/home.ripley/Attachment/MKP/4855/MPM00029354806/imagen2-1.jpeg"  class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://m.media-amazon.com/images/I/71La6t8rhwL._AC_SX569_.jpg" class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://d3ugyf2ht6aenh.cloudfront.net/stores/001/062/773/products/sava-roja-91-4c4ed0c1c220a235e416530740380898-1024-1024.jpg" class="img-fluid object-fit-scale h-100" alt=" ">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Mountain Bike</h5>
+              <p class="card-text">Designed for performance and versatility on all types of terrain, this bike is the perfect companion for outdoor adventures. With a lightweight aluminum frame, soft suspension fork, and high-quality Shimano shifting system, this bike ensures a smooth, controlled ride on demanding trails. Whether you're exploring unpaved roads or conquering steep trails, it'll get you there with confidence and style.</p>
+              <h5 class= "card-text">1.999 USD</h5>
+              <a href="#" class="btn btn-primary">Buy</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 border-info mb-3 shadow-lg">
+        <div class="card-header border-info text-center bg-transparent">
+          <p><h4>Company: Borne Sound</h4></p>
+          <p>Validated Company: Yes</p>
+          <p>Ratings: 
+            <img src="https://static.vecteezy.com/system/resources/previews/016/016/805/non_2x/four-stars-rating-with-transparent-background-free-png.png" class="img-fluid" width="110px" style="margin-top: -50px; margin-bottom: -45px;">
+          </p>
+          <a class="btn btn-outline-info" href={% url 'llamada' %} role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-headset" viewBox="0 0 16 16">
+              <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href="#" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'agenda' %} role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+              <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'chat' %} role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-text" viewBox="0 0 16 16">
+            <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"/>
+            <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6m0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+          </svg>
+          </a>
+          <a class="btn btn-outline-info" href="https://outlook.office365.com/mail/" role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-at" viewBox="0 0 16 16">
+            <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2zm3.708 6.208L1 11.105V5.383zM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2z"/>
+            <path d="M14.247 14.269c1.01 0 1.587-.857 1.587-2.025v-.21C15.834 10.43 14.64 9 12.52 9h-.035C10.42 9 9 10.36 9 12.432v.214C9 14.82 10.438 16 12.358 16h.044c.594 0 1.018-.074 1.237-.175v-.73c-.245.11-.673.18-1.18.18h-.044c-1.334 0-2.571-.788-2.571-2.655v-.157c0-1.657 1.058-2.724 2.64-2.724h.04c1.535 0 2.484 1.05 2.484 2.326v.118c0 .975-.324 1.39-.639 1.39-.232 0-.41-.148-.41-.42v-2.19h-.906v.569h-.03c-.084-.298-.368-.63-.954-.63-.778 0-1.259.555-1.259 1.4v.528c0 .892.49 1.434 1.26 1.434.471 0 .896-.227 1.014-.643h.043c.118.42.617.648 1.12.648m-2.453-1.588v-.227c0-.546.227-.791.573-.791.297 0 .572.192.572.708v.367c0 .573-.253.744-.564.744-.354 0-.581-.215-.581-.8Z"/>
+          </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'reunion' %} role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-workspace" viewBox="0 0 16 16">
+            <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+            <path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.4 5.4 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2z"/>
+          </svg>
+          </a>
+        </div>
+        <div class="row g-0 h-100">
+          <div class="col-md-4">
+            <div id="carouselExampleSlidesOnly" class="carousel slide object-fit-scale border h-100" data-bs-ride="carousel">
+              <div class="carousel-inner h-100">
+                <div class="carousel-item active h-100">
+                  <img src="https://clsonyb2c.vtexassets.com/arquivos/ids/461833-800-800?v=638180359691170000&width=800&height=800&aspect=true"  class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://falabella.scene7.com/is/image/Falabella/gsc_122311555_3316292_1?wid=800&hei=800&qlt=70" class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://www.retail.cl/cdn/shop/products/SKUB08FC6QLKN1.jpg?v=1678907943" class="img-fluid object-fit-scale h-100" alt=" ">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Wireless headphones</h5>
+              <p class="card-text">Immerse yourself in a world of exceptional sound with these high-end headphones. Equipped with the latest noise cancellation technology, the ZZ-0000 effectively blocks external noise to give you an immersive listening experience. Plus, their exceptional comfort and long-lasting battery make them the perfect companion for long trips or extended listening sessions.</p>
+              <h5 class= "card-text">1.999 USD</h5>
+              <a href="#" class="btn btn-primary">Buy</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 border-info mb-3 shadow-lg">
+        <div class="card-header border-info text-center bg-transparent">
+          <p><h4>Company: CoffeCups</h4></p>
+          <p>Validated Company: No</p>
+          <p>Ratings: 
+            <img src="https://static.vecteezy.com/system/resources/previews/016/017/445/non_2x/two-stars-rating-with-transparent-background-free-png.png" class="img-fluid" width="110px" style="margin-top: -50px; margin-bottom: -45px;">
+          </p>
+          <a class="btn btn-outline-info" href={% url 'llamada' %} role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-headset" viewBox="0 0 16 16">
+              <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href="#" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'agenda' %} role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+              <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'chat' %} role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-text" viewBox="0 0 16 16">
+            <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"/>
+            <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6m0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+          </svg>
+          </a>
+          <a class="btn btn-outline-info" href="https://outlook.office365.com/mail/" role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-at" viewBox="0 0 16 16">
+            <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2zm3.708 6.208L1 11.105V5.383zM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2z"/>
+            <path d="M14.247 14.269c1.01 0 1.587-.857 1.587-2.025v-.21C15.834 10.43 14.64 9 12.52 9h-.035C10.42 9 9 10.36 9 12.432v.214C9 14.82 10.438 16 12.358 16h.044c.594 0 1.018-.074 1.237-.175v-.73c-.245.11-.673.18-1.18.18h-.044c-1.334 0-2.571-.788-2.571-2.655v-.157c0-1.657 1.058-2.724 2.64-2.724h.04c1.535 0 2.484 1.05 2.484 2.326v.118c0 .975-.324 1.39-.639 1.39-.232 0-.41-.148-.41-.42v-2.19h-.906v.569h-.03c-.084-.298-.368-.63-.954-.63-.778 0-1.259.555-1.259 1.4v.528c0 .892.49 1.434 1.26 1.434.471 0 .896-.227 1.014-.643h.043c.118.42.617.648 1.12.648m-2.453-1.588v-.227c0-.546.227-.791.573-.791.297 0 .572.192.572.708v.367c0 .573-.253.744-.564.744-.354 0-.581-.215-.581-.8Z"/>
+          </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'reunion' %} role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-workspace" viewBox="0 0 16 16">
+            <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+            <path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.4 5.4 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2z"/>
+          </svg>
+          </a>
+        </div>
+        <div class="row g-0 h-100">
+          <div class="col-md-4">
+            <div id="carouselExampleSlidesOnly" class="carousel slide object-fit-scale border h-100" data-bs-ride="carousel">
+              <div class="carousel-inner h-100">
+                <div class="carousel-item active h-100">
+                  <img src="https://http2.mlstatic.com/D_Q_NP_834030-MLA50910828733_072022-O.webp"  class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://www.nespresso.com/ecom/medias/sys_master/public/10392431329310/MACHINES-B2C-NESPRESSO-INISSIA-INISSIA-D40BK-BLACK-022120141557.png" class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://www.nespresso.com/ecom/medias/sys_master/public/14611756679198/machines.png" class="img-fluid object-fit-scale h-100" alt=" ">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Capsule coffee maker</h5>
+              <p class="card-text">This sleek, compact coffee maker is perfect for coffee lovers looking for convenience and quality. With a minimalist and easy-to-use design, this coffee maker offers a wide variety of high-quality coffees at the touch of a button. Its compact size makes it ideal for small spaces, while its coffee extraction technology guarantees a perfect cup in every preparation.</p>
+              <h5 class= "card-text">1.999 USD</h5>
+              <a href="#" class="btn btn-primary">Buy</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 border-info mb-3 shadow-lg">
+        <div class="card-header border-info text-center bg-transparent">
+          <p><h4>Company: SolarShade</h4></p>
+          <p>Validated Company: Yes</p>
+          <p>Ratings: 
+            <img src="https://static.vecteezy.com/system/resources/previews/016/017/089/non_2x/five-stars-rating-with-transparent-background-free-png.png" class="img-fluid" width="110px" style="margin-top: -50px; margin-bottom: -45px;">
+          </p>
+          <a class="btn btn-outline-info" href={% url 'llamada' %} role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-headset" viewBox="0 0 16 16">
+              <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href="#" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'agenda' %} role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+              <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'chat' %} role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-text" viewBox="0 0 16 16">
+            <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"/>
+            <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6m0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+          </svg>
+          </a>
+          <a class="btn btn-outline-info" href="https://outlook.office365.com/mail/" role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-at" viewBox="0 0 16 16">
+            <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2zm3.708 6.208L1 11.105V5.383zM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2z"/>
+            <path d="M14.247 14.269c1.01 0 1.587-.857 1.587-2.025v-.21C15.834 10.43 14.64 9 12.52 9h-.035C10.42 9 9 10.36 9 12.432v.214C9 14.82 10.438 16 12.358 16h.044c.594 0 1.018-.074 1.237-.175v-.73c-.245.11-.673.18-1.18.18h-.044c-1.334 0-2.571-.788-2.571-2.655v-.157c0-1.657 1.058-2.724 2.64-2.724h.04c1.535 0 2.484 1.05 2.484 2.326v.118c0 .975-.324 1.39-.639 1.39-.232 0-.41-.148-.41-.42v-2.19h-.906v.569h-.03c-.084-.298-.368-.63-.954-.63-.778 0-1.259.555-1.259 1.4v.528c0 .892.49 1.434 1.26 1.434.471 0 .896-.227 1.014-.643h.043c.118.42.617.648 1.12.648m-2.453-1.588v-.227c0-.546.227-.791.573-.791.297 0 .572.192.572.708v.367c0 .573-.253.744-.564.744-.354 0-.581-.215-.581-.8Z"/>
+          </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'reunion' %} role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-workspace" viewBox="0 0 16 16">
+            <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+            <path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.4 5.4 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2z"/>
+          </svg>
+          </a>
+        </div>
+        <div class="row g-0 h-100">
+          <div class="col-md-4">
+            <div id="carouselExampleSlidesOnly" class="carousel slide object-fit-scale border h-100" data-bs-ride="carousel">
+              <div class="carousel-inner h-100">
+                <div class="carousel-item active h-100">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9Dnslq0-Okn9gwpZ_JywDYcDNUu6xt7Ul5INnolpQVw&s"  class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGhT2ZfXYLO5Q0orejuNXaMgSmVUqCKHsgdPYa2gcc8ksoBdib0mPYouEH2hu5d2awT0I&usqp=CAU" class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://es.solargaps.com/wp-content/uploads/sites/3/slider14/white.jpg" class="img-fluid object-fit-scale h-100" alt=" ">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Smart Solar Blinds</h5>
+              <p class="card-text">SolarShade™ are smart solar shades designed to optimize energy efficiency and home comfort. With built-in sensors and smart connectivity, the blinds automatically adjust based on the intensity of the sun, helping to regulate indoor temperature and reduce energy consumption. With an elegant and functional design, SolarShade™ combines style and sustainability to create a comfortable and eco-friendly indoor environment.</p>
+              <h5 class= "card-text">1.999 USD</h5>
+              <a href="#" class="btn btn-primary">Buy</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 border-info mb-3 shadow-lg">
+        <div class="card-header border-info text-center bg-transparent">
+          <p><h4>Company: NutriBlend</h4></p>
+          <p>Validated Company: No</p>
+          <p>Ratings: 
+            <img src="https://static.vecteezy.com/system/resources/previews/016/017/445/non_2x/two-stars-rating-with-transparent-background-free-png.png" class="img-fluid" width="110px" style="margin-top: -50px; margin-bottom: -45px;">
+          </p>
+          <a class="btn btn-outline-info" href={% url 'llamada' %} role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-headset" viewBox="0 0 16 16">
+              <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href="#" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'agenda' %} role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+              <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+            </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'chat' %} role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-text" viewBox="0 0 16 16">
+            <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"/>
+            <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6m0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+          </svg>
+          </a>
+          <a class="btn btn-outline-info" href="https://outlook.office365.com/mail/" role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-at" viewBox="0 0 16 16">
+            <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2zm3.708 6.208L1 11.105V5.383zM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2z"/>
+            <path d="M14.247 14.269c1.01 0 1.587-.857 1.587-2.025v-.21C15.834 10.43 14.64 9 12.52 9h-.035C10.42 9 9 10.36 9 12.432v.214C9 14.82 10.438 16 12.358 16h.044c.594 0 1.018-.074 1.237-.175v-.73c-.245.11-.673.18-1.18.18h-.044c-1.334 0-2.571-.788-2.571-2.655v-.157c0-1.657 1.058-2.724 2.64-2.724h.04c1.535 0 2.484 1.05 2.484 2.326v.118c0 .975-.324 1.39-.639 1.39-.232 0-.41-.148-.41-.42v-2.19h-.906v.569h-.03c-.084-.298-.368-.63-.954-.63-.778 0-1.259.555-1.259 1.4v.528c0 .892.49 1.434 1.26 1.434.471 0 .896-.227 1.014-.643h.043c.118.42.617.648 1.12.648m-2.453-1.588v-.227c0-.546.227-.791.573-.791.297 0 .572.192.572.708v.367c0 .573-.253.744-.564.744-.354 0-.581-.215-.581-.8Z"/>
+          </svg>
+          </a>
+          <a class="btn btn-outline-info" href={% url 'reunion' %} role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-workspace" viewBox="0 0 16 16">
+            <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+            <path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.4 5.4 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2z"/>
+          </svg>
+          </a>
+        </div>
+        <div class="row g-0 h-100">
+          <div class="col-md-4">
+            <div id="carouselExampleSlidesOnly" class="carousel slide object-fit-scale border h-100" data-bs-ride="carousel">
+              <div class="carousel-inner h-100">
+                <div class="carousel-item active h-100">
+                  <img src="https://i5.walmartimages.com/asr/a9162d7c-d8f8-4e45-a43a-6e01889543e4.1fcd34536270b410f4f354a7f3e4e275.jpeg?odnHeight=2000&odnWidth=2000&odnBg=ffffff"  class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://falabella.scene7.com/is/image/Falabella/881650363_1" class="img-fluid object-fit-scale h-100" alt="...">
+                </div>
+                <div class="carousel-item h-100">
+                  <img src="https://i5.walmartimages.com/asr/b7c5faea-10c1-44f2-bdd5-ca56f5024894.4bfeb5136e6bb1781b18c2b4b6416a83.jpeg?odnHeight=2000&odnWidth=2000&odnBg=ffffff" class="img-fluid object-fit-scale h-100" alt=" ">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">High Power Blender</h5>
+              <p class="card-text">NutriBlend™ is a high-power blender designed to provide optimal results when preparing shakes, smoothies and other healthy recipes. Equipped with stainless steel blades and a powerful motor, NutriBlend™ can easily pulverize fruits, vegetables and other ingredients to create nutritious and delicious drinks in seconds. Compact and easy to use, this blender is perfect for those looking for a convenient and quick way to incorporate nutrients into their daily diet.</p>
+              <h5 class= "card-text">1.999 USD</h5>
+              <a href="#" class="btn btn-primary">Buy</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <style>                                 
+    .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+   color: #fff;
+   background-color: #004AAD;
+     }
+     .link-info{
+         color: #004AAD;
+
+     }
+     .border-info{
+         border-color: #004AAD !important;
+     }
+     .btn-primary {
+     color: #fff;
+     background-color: #004AAD;
+     border-color: #004AAD;
+     }
+     .nav-link {
+     color: #004AAD;
+     }
+     .btn-outline-info {
+   --bs-btn-color: #004AAD;
+   --bs-btn-border-color: #004AAD;
+     }
+     .nav-pills .nav-link.active{
+       background: #004AAD;
+     }
+     .btn-outline-success {
+   --bs-btn-color: #004AAD;
+   --bs-btn-border-color: #004AAD;
+   --bs-btn-hover-color: #fff;
+   --bs-btn-hover-bg: #004AAD;
+   --bs-btn-hover-border-color: #004AAD;
+   --bs-btn-focus-shadow-rgb: 25, 135, 84;
+   --bs-btn-active-color: #fff;
+   --bs-btn-active-bg: #004AAD;
+   --bs-btn-active-border-color: #004AAD;
+   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+   --bs-btn-disabled-color: #004AAD;
+   --bs-btn-disabled-bg: transparent;
+   --bs-btn-disabled-border-color: #004AAD;
+   --bs-gradient: none;
+}
+.btn-outline-info {
+        background-color: #004AAD;
+        color: white;
+      }
+      img, svg {
+    margin-bottom: 3px;
+}
+</style>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

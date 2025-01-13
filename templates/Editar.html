@@ -1,0 +1,324 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Contacts</title> <!-- Cambiado de "Contactos" a "Contacts" -->
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../static/css/cardstyle.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+       
+    </head>
+    <body class="container mt-5">
+        {% include "navegacion.html" %}
+
+<div class="container mt-4">
+    <h2>Edit Contacts</h2> <!-- Cambiado de "Editar Contactos" a "Edit Contacts" -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th> <!-- Cambiado de "Nombre" a "Name" -->
+                <th>Phone</th> <!-- Cambiado de "Teléfono" a "Phone" -->
+                <th>Email</th>
+                <th>Company</th> <!-- Cambiado de "Empresa" a "Company" -->
+                <th>Actions</th> <!-- Cambiado de "Acciones" a "Actions" -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>CAMILO TORREALBA VALENZUELA</td>
+                <td>N/A</td>
+                <td>aolguin@altotraiguen.cl</td>
+                <td>AGRICOLA ALTO TRAIGUEN SA</td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Contacts Menu <!-- Cambiado de "Menú Contactos" a "Contacts Menu" -->
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="http://127.0.0.1:8000/llamada/">Call</a></li> <!-- Cambiado de "Llamar" a "Call" -->
+                            <li><a class="dropdown-item" href="http://127.0.0.1:8000/reunion/">Schedule Meeting</a></li> <!-- Cambiado de "Generar Reunión" a "Schedule Meeting" -->
+                            <li><a class="dropdown-item" href="https://outlook.office365.com/mail/">Send Email</a></li> <!-- Cambiado de "Enviar Correo" a "Send Email" -->
+                            <li><a class="dropdown-item" href="http://127.0.0.1:8000/chat/">Open Chat</a></li> <!-- Cambiado de "Abrir chat" a "Open Chat" -->
+                        </ul>
+                        <button class="btn btn-danger" onclick="openModal('eliminar', this.parentNode.parentNode.parentNode)">Delete</button> <!-- Cambiado de "Eliminar" a "Delete" -->
+                        <button class="btn btn-warning" onclick="openModal('editar', this.parentNode.parentNode.parentNode)">Edit</button> <!-- Cambiado de "Editar" a "Edit" -->
+                    </div>
+                </td>
+            </tr>
+            <!-- Otras filas de la tabla -->
+            <tr>
+                <td>MARCOS HUERTA YAÑEZ</td>
+                <td>+56 937748578</td>
+                <td>maciel.valdes@alcia.cl</td>
+                <td>ALCIA SERVICIOS LTDA.</td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Contacts Menu <!-- Cambiado de "Menú Contactos" a "Contacts Menu" -->
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Call</a></li> <!-- Cambiado de "Llamar" a "Call" -->
+                            <li><a class="dropdown-item" href="#">Schedule Meeting</a></li> <!-- Cambiado de "Generar Reunión" a "Schedule Meeting" -->
+                            <li><a class="dropdown-item" href="#">Send Email</a></li> <!-- Cambiado de "Enviar Correo" a "Send Email" -->
+                            <li><a class="dropdown-item" href="#">Open Chat</a></li> <!-- Cambiado de "Abrir chat" a "Open Chat" -->
+                        </ul>
+                        <button class="btn btn-danger" onclick="openModal('eliminar', this.parentNode.parentNode.parentNode)">Delete</button> <!-- Cambiado de "Eliminar" a "Delete" -->
+                        <button class="btn btn-warning" onclick="openModal('editar', this.parentNode.parentNode.parentNode)">Edit</button> <!-- Cambiado de "Editar" a "Edit" -->
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>RENE ARAYA MALDONADO</td>
+                <td>+56 964587114</td>
+                <td>coteee-@hotmail.com</td>
+                <td>Servicios de corta de madera</td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Contacts Menu <!-- Cambiado de "Menú Contactos" a "Contacts Menu" -->
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Call</a></li> <!-- Cambiado de "Llamar" a "Call" -->
+                            <li><a class="dropdown-item" href="#">Schedule Meeting</a></li> <!-- Cambiado de "Generar Reunión" a "Schedule Meeting" -->
+                            <li><a class="dropdown-item" href="#">Send Email</a></li> <!-- Cambiado de "Enviar Correo" a "Send Email" -->
+                            <li><a class="dropdown-item" href="#">Open Chat</a></li> <!-- Cambiado de "Abrir chat" a "Open Chat" -->
+                        </ul>
+                        <button class="btn btn-danger" onclick="openModal('eliminar', this.parentNode.parentNode.parentNode)">Delete</button> <!-- Cambiado de "Eliminar" a "Delete" -->
+                        <button class="btn btn-warning" onclick="openModal('editar', this.parentNode.parentNode.parentNode)">Edit</button> <!-- Cambiado de "Editar" a "Edit" -->
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>MARIA MORALES LACOSTE</td>
+                <td>+56 931145126</td>
+                <td>piturra@ofd.ged.cl</td>
+                <td>ADMINISTRADORA DE RESTAURANTES LIMITADA</td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Contacts Menu <!-- Cambiado de "Menú Contactos" a "Contacts Menu" -->
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Call</a></li> <!-- Cambiado de "Llamar" a "Call" -->
+                            <li><a class="dropdown-item" href="#">Schedule Meeting</a></li> <!-- Cambiado de "Generar Reunión" a "Schedule Meeting" -->
+                            <li><a class="dropdown-item" href="#">Send Email</a></li> <!-- Cambiado de "Enviar Correo" a "Send Email" -->
+                            <li><a class="dropdown-item" href="#">Open Chat</a></li> <!-- Cambiado de "Abrir chat" a "Open Chat" -->
+                        </ul>
+                        <button class="btn btn-danger" onclick="openModal('eliminar', this.parentNode.parentNode.parentNode)">Delete</button> <!-- Cambiado de "Eliminar" a "Delete" -->
+                        <button class="btn btn-warning" onclick="openModal('editar', this.parentNode.parentNode.parentNode)">Edit</button> <!-- Cambiado de "Editar" a "Edit" -->
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>ANA MARIA MUÑOZ </td>
+                <td>+56 965687445</td>
+                <td>rrhh2@pk.cl</td>
+                <td>AGENCIA PRIZE EMPRESA DE SERVICIOS TRANSITORIOS LIMITADA</td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Contacts Menu <!-- Cambiado de "Menú Contactos" a "Contacts Menu" -->
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Call</a></li> <!-- Cambiado de "Llamar" a "Call" -->
+                            <li><a class="dropdown-item" href="#">Schedule Meeting</a></li> <!-- Cambiado de "Generar Reunión" a "Schedule Meeting" -->
+                            <li><a class="dropdown-item" href="#">Send Email</a></li> <!-- Cambiado de "Enviar Correo" a "Send Email" -->
+                            <li><a class="dropdown-item" href="#">Open Chat</a></li> <!-- Cambiado de "Abrir chat" a "Open Chat" -->
+                        </ul>
+                        <button class="btn btn-danger" onclick="openModal('eliminar', this.parentNode.parentNode.parentNode)">Delete</button> <!-- Cambiado de "Eliminar" a "Delete" -->
+                        <button class="btn btn-warning" onclick="openModal('editar', this.parentNode.parentNode.parentNode)">Edit</button> <!-- Cambiado de "Editar" a "Edit" -->
+                    </div>
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+    <!-- Botón para agregar nuevos datos -->
+    <button class="btn btn-primary" onclick="agregarNuevo()">Add New Contact</button> <!-- Cambiado de "Agregar Nuevo Contacto" a "Add New Contact" -->
+</div>
+
+<!-- Modal -->
+<div class="modal" tabindex="-1" role="dialog" id="myModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Action</h5> <!-- Cambiado de "Confirmar acción" a "Confirm Action" -->
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="modal-message">Are you sure you want to perform this action?</p> <!-- Cambiado de "¿Estás seguro de que deseas realizar esta acción?" a "Are you sure you want to perform this action?" -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button> <!-- Cambiado de "Cancelar" a "Cancel" -->
+                <button type="button" class="btn btn-primary" id="confirm-btn" onclick="performAction()">Confirm</button> <!-- Cambiado de "Confirmar" a "Confirm" -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para edición -->
+<div class="modal" tabindex="-1" role="dialog" id="editModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Contact</h5> <!-- Cambiado de "Editar Contacto" a "Edit Contact" -->
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="edit-nombre" class="form-control mb-2" placeholder="Name"> <!-- Cambiado de "Nombre" a "Name" -->
+                <input type="text" id="edit-telefono" class="form-control mb-2" placeholder="Phone"> <!-- Cambiado de "Teléfono" a "Phone" -->
+                <input type="text" id="edit-email" class="form-control mb-2" placeholder="Email">
+                <input type="text" id="edit-empresa" class="form-control mb-2" placeholder="Company"> <!-- Cambiado de "Empresa" a "Company" -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button> <!-- Cambiado de "Cancelar" a "Cancel" -->
+                <button type="button" class="btn btn-primary" onclick="confirmEdit()">Save changes</button> <!-- Cambiado de "Guardar cambios" a "Save changes" -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap 5 JavaScript y jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+<script>
+    var filaSeleccionada;
+
+    function openModal(action, fila) {
+        filaSeleccionada = fila;
+        if (action === 'eliminar') {
+            $('#modal-message').text('Are you sure you want to delete this contact?'); <!-- Cambiado de "¿Estás seguro de que deseas eliminar este contacto?" a "Are you sure you want to delete this contact?" -->
+            $('#myModal').modal('show');
+        } else if (action === 'editar') {
+            $('#edit-nombre').val($(fila).find('td:eq(0)').text());
+            $('#edit-telefono').val($(fila).find('td:eq(1)').text());
+            $('#edit-email').val($(fila).find('td:eq(2)').text());
+            $('#edit-empresa').val($(fila).find('td:eq(3)').text());
+            $('#editModal').modal('show');
+        }
+    }
+
+    function performAction() {
+        $('#myModal').modal('hide');
+        var accion = $('#modal-message').text();
+        if (accion.includes('delete')) { //<!-- Cambiado de "eliminar" a "delete" -->
+            $(filaSeleccionada).remove();
+        }
+    }
+
+    function confirmEdit() {
+        var nombre = $('#edit-nombre').val();
+        var telefono = $('#edit-telefono').val();
+        var email = $('#edit-email').val();
+        var empresa = $('#edit-empresa').val();
+
+        $(filaSeleccionada).find('td:eq(0)').text(nombre);
+        $(filaSeleccionada).find('td:eq(1)').text(telefono);
+        $(filaSeleccionada).find('td:eq(2)').text(email);
+        $(filaSeleccionada).find('td:eq(3)').text(empresa);
+
+        $('#editModal').modal('hide');
+    }
+
+    function agregarNuevo() {
+        var nuevoFormulario = `
+            <tr id="nuevaFila">
+                <td><input type="text" id="nuevoNombre" placeholder="Name"></td> <!-- Cambiado de "Nombre" a "Name" -->
+                <td><input type="text" id="nuevoTelefono" placeholder="Phone"></td> <!-- Cambiado de "Teléfono" a "Phone" -->
+                <td><input type="text" id="nuevoEmail" placeholder="Email"></td>
+                <td><input type="text" id="nuevaEmpresa" placeholder="Company"></td> <!-- Cambiado de "Empresa" a "Company" -->
+                <td>
+                    <button class="btn btn-primary" onclick="agregarFila()">Add</button> <!-- Cambiado de "Agregar" a "Add" -->
+                </td>
+            </tr>
+        `;
+        $('tbody').append(nuevoFormulario);
+    }
+
+    function agregarFila() {
+        var nuevoNombre = $('#nuevoNombre').val();
+        var nuevoTelefono = $('#nuevoTelefono').val();
+        var nuevoEmail = $('#nuevoEmail').val();
+        var nuevaEmpresa = $('#nuevaEmpresa').val();
+
+        var nuevaFila = `
+            <tr>
+                <td>${nuevoNombre}</td>
+                <td>${nuevoTelefono}</td>
+                <td>${nuevoEmail}</td>
+                <td>${nuevaEmpresa}</td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Contacts Menu <!-- Cambiado de "Menú Contactos" a "Contacts Menu" -->
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Call</a></li> <!-- Cambiado de "Llamar" a "Call" -->
+                            <li><a class="dropdown-item" href="#">Schedule Meeting</a></li> <!-- Cambiado de "Generar Reunión" a "Schedule Meeting" -->
+                            <li><a class="dropdown-item" href="#">Send Email</a></li> <!-- Cambiado de "Enviar Correo" a "Send Email" -->
+                        </ul>
+                        <button class="btn btn-danger" onclick="openModal('eliminar', this.parentNode.parentNode.parentNode)">Delete</button> <!-- Cambiado de "Eliminar" a "Delete" -->
+                        <button class="btn btn-warning" onclick="openModal('editar', this.parentNode.parentNode.parentNode)">Edit</button> <!-- Cambiado de "Editar" a "Edit" -->
+                    </div>
+                </td>
+            </tr>
+        `;
+
+        $('#nuevaFila').replaceWith(nuevaFila);
+    }
+    var filaSeleccionada;
+
+    function openModal(action, fila) {
+        filaSeleccionada = fila;
+        if (action === 'eliminar') {
+            $('#modal-message').text('Are you sure you want to delete this contact?'); //<!-- Cambiado de "¿Estás seguro de que deseas eliminar este contacto?" a "Are you sure you want to delete this contact?" -->
+            $('#myModal').modal('show');
+        } else if (action === 'editar') {
+            $('#edit-empresa').val($(fila).find('td:eq(3)').text());
+            $('#edit-cargo').val($(fila).find('td:eq(4)').text());
+            $('#editModal').modal('show');
+        }
+    }
+
+        // Funcion para ajustar el tamaño del navbar según la palabra FUNCIONANDO 21-06-2024 1:04
+        function redirectTo(url) {
+        window.location.href = url;
+        }
+
+        function selectActiveTab() {
+            const currentUrl = window.location.href;
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                const tabUrl = tab.nextElementSibling.getAttribute('onclick').match(/'(.*)'/)[1];
+                if (currentUrl.includes(tab.value)) {
+                    tab.checked = true;
+                    updateIndicatorPosition(tab.nextElementSibling);
+                }
+            });
+        }
+
+        function updateIndicatorPosition(label) {
+            const indicator = document.querySelector('.indicator');
+            const labelRect = label.getBoundingClientRect();
+            const containerRect = label.parentNode.getBoundingClientRect();
+            indicator.style.width = labelRect.width + 'px';
+            indicator.style.left = (labelRect.left - containerRect.left) + 'px';
+        }
+
+        document.querySelectorAll('.tab_label').forEach(label => {
+            label.addEventListener('click', () => {
+                updateIndicatorPosition(label);
+            });
+        });
+
+        window.onload = selectActiveTab;
+    </script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>    
+</body>
+</html>
